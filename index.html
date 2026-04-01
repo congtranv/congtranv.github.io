@@ -3,109 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trần Văn Cộng - Software Engineer</title>
+    <title>Trần Văn Cộng - Portfolio</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #064e3b, #065f46, #064e3b);
-            font-family: 'Segoe UI', sans-serif;
-            color: white;
-            transition: background 0.5s ease;
+        :root {
+            --bg-start: #064e3b; --bg-end: #065f46;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --text-color: white;
         }
-        .glass-card {
-            position: relative;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
+        body.material-you {
+            --bg-start: #4c0303; --bg-end: #7b0d0d;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            --text-color: #fce4e4;
         }
-
-        /* Hiệu ứng đèn viền chạy quanh */
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, #10b981, #065f46, #10b981, #065f46);
-            background-size: 400%;
-            border-radius: 22px;
-            z-index: -1;
-            animation: border-animation 10s linear infinite;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .glass-card:hover::before {
-            opacity: 1;
-        }
-
-        @keyframes border-animation {
-            0% { background-position: 0 0; }
-            100% { background-position: 400% 0; }
-        }
-        h1 { margin: 0 0 10px 0; font-size: 2em; }
-        p { opacity: 0.8; margin: 5px 0; }
-        .footer-links {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .skills {
-            text-align: left;
-            margin-top: 20px;
-        }
-        .contact-links {
-            text-align: right;
-            margin-top: 20px;
-        }
-        .link-item {
-            display: block;
-            color: #fff;
-            text-decoration: none;
-            margin: 5px 0;
-            font-size: 0.9em;
-            transition: 0.3s;
-        }
-        .link-item:hover { color: #10b981; }
+        body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(135deg, var(--bg-start), var(--bg-end)); font-family: 'Segoe UI', sans-serif; color: var(--text-color); transition: all 0.5s ease; }
+        
+        .glass-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 50px; box-shadow: var(--glass-shadow); text-align: center; width: 90%; max-width: 400px; border-top: 1px solid rgba(255,255,255,0.4); border-left: 1px solid rgba(255,255,255,0.4); }
+        
+        .nav-menu { position: absolute; top: 20px; display: flex; gap: 10px; }
+        .nav-menu button { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-color); padding: 8px 15px; border-radius: 20px; cursor: pointer; backdrop-filter: blur(10px); }
+        
+        #theme-toggle { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-color); cursor: pointer; backdrop-filter: blur(10px); }
+        
+        .page { display: none; }
+        .page.active { display: block; }
     </style>
 </head>
 <body>
-    <div class="glass-card">
+    <div class="nav-menu">
+        <button onclick="showPage('home')">Trang chủ</button>
+        <button onclick="showPage('blog')">Blog</button>
+        <button onclick="showPage('projects')">Dự án</button>
+        <button onclick="showPage('about')">About</button>
+    </div>
+
+    <div id="home" class="page active glass-card">
         <h1>Trần Văn Cộng</h1>
         <p>Kỹ sư phát triển phần mềm</p>
-        
-        <div class="footer-links">
-            <div class="skills">
-                <p style="font-weight: bold; margin-bottom: 5px;">Kỹ năng:</p>
-                <span class="skill-tag">C++</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">ROS</span>
-                <span class="skill-tag">Linux</span>
-                <span class="skill-tag">git</span>
-            </div>
-            <div class="contact-links">
-                <p style="font-weight: bold; margin-bottom: 5px;">Liên hệ:</p>
-                <a href="https://github.com/congtranv" target="_blank" class="link-item">GitHub: @congtranv</a>
-                <a href="https://linkedin.com/in/congtranv" target="_blank" class="link-item">LinkedIn: @congtranv</a>
-            </div>
-        </div>
     </div>
+    <div id="blog" class="page glass-card"><h1>Blog</h1><p>Coming soon...</p></div>
+    <div id="projects" class="page glass-card"><h1>Dự án</h1><p>Coming soon...</p></div>
+    <div id="about" class="page glass-card"><h1>About</h1><p>Software Engineer.</p></div>
+
+    <button id="theme-toggle">Chuyển Giao Diện</button>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+        document.getElementById('theme-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('material-you');
+        });
+    </script>
 </body>
 </html>
