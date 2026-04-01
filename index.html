@@ -21,15 +21,26 @@
         }
         body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: linear-gradient(135deg, var(--bg-start), var(--bg-end)); font-family: 'Segoe UI', sans-serif; color: var(--text-color); transition: all 0.5s ease; }
         
-        .glass-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 50px; box-shadow: var(--glass-shadow); text-align: center; width: 90%; max-width: 400px; border-top: 1px solid rgba(255,255,255,0.4); border-left: 1px solid rgba(255,255,255,0.4); }
+        /* Base Liquid Glass card */
+        .glass-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 30px; box-shadow: var(--glass-shadow); text-align: center; width: 90%; max-width: 400px; border-top: 1px solid rgba(255,255,255,0.4); border-left: 1px solid rgba(255,255,255,0.4); }
         
-        .nav-menu { position: absolute; top: 20px; display: flex; gap: 10px; }
+        .nav-menu { position: absolute; top: 20px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
         .nav-menu button { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-color); padding: 8px 15px; border-radius: 20px; cursor: pointer; backdrop-filter: blur(10px); }
         
         #theme-toggle { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-color); cursor: pointer; backdrop-filter: blur(10px); }
         
         .page { display: none; }
         .page.active { display: block; }
+
+        /* Timeline Container */
+        .about-container { width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; padding-bottom: 20px; }
+        
+        /* Timeline Items as Glass Cards */
+        .timeline-item { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); 
+                         padding: 20px; border-radius: 25px; margin-top: 20px; text-align: left;
+                         box-shadow: var(--glass-shadow); border-top: 1px solid rgba(255,255,255,0.3); }
+        .timeline-item h3 { margin: 0 0 5px 0; font-size: 1.1em; color: #ff4d4d; }
+        .timeline-item p { margin: 0; font-size: 0.9em; opacity: 0.9; }
     </style>
 </head>
 <body>
@@ -46,7 +57,39 @@
     </div>
     <div id="blog" class="page glass-card"><h1>Blog</h1><p>Coming soon...</p></div>
     <div id="projects" class="page glass-card"><h1>Dự án</h1><p>Coming soon...</p></div>
-    <div id="about" class="page glass-card"><h1>About</h1><p>Software Engineer.</p></div>
+    
+    <div id="about" class="page about-container">
+        <!-- Intro Card -->
+        <div class="glass-card" style="margin: 0 auto;">
+            <h1>Về tôi</h1>
+            <p>Xin chào, tôi là Cộng. Hiện tại tôi đang tham gia phát triển phần mềm cho hệ thống thông tin giải trí của ô tô</p>
+            <p>Bên cạnh đó tôi cũng tự tìm hiểu và xây dựng cho bản thân các giải pháp tự động hóa thông minh.</p>
+        </div>
+        
+        <!-- Timeline Items -->
+        <div class="timeline-item">
+            <h3>2022 - Nay</h3>
+            <p>Kỹ sư phát triển phần mềm</p>
+            <p>Công ty TNHH Phần mềm FPT</p>
+        </div>
+        <div class="timeline-item">
+            <h3>2020 - 2022</h3>
+            <p>Tốt nghiệp Đại học Bách Khoa Hà Nội</p>
+            <p>Chuyên ngành: Kỹ thuật Điện tử</p>
+            <p>Trình độ đào tạo: Thạc sĩ Khoa học</p>
+        </div>
+        <div class="timeline-item">
+            <h3>2014 - 2020</h3>
+            <p>Tốt nghiệp Đại học Bách Khoa Hà Nội</p>
+            <p>Chuyên ngành: Kỹ thuật Điện tử - Kỹ thuật máy tính</p>
+            <p>Trình độ đào tạo: Kỹ sư</p>
+        </div>
+        <div class="timeline-item">
+            <h3>2016 - 2018</h3>
+            <p>Thực tập sinh và Nhân viên học việc</p>
+            <p>Công ty TNHH Bkav SmartHome</p>
+        </div>
+    </div>
 
     <button id="theme-toggle">Chuyển Giao Diện</button>
 
