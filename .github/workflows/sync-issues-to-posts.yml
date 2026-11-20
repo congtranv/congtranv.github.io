@@ -25,6 +25,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node .github/scripts/sync-issues.mjs
 
+      - name: Sync posts to Firebase
+        env:
+          FIREBASE_DB_SECRET: ${{ secrets.FIREBASE_DB_SECRET }}
+        run: |
+          curl -fsS -X PUT -H "Content-Type: application/json" \
+            -d @data/posts.json \
+            "https://congtranv-blog-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json?auth=${FIREBASE_DB_SECRET}"
+
       - name: Commit updated posts
         run: |
           git config user.name "github-actions[bot]"

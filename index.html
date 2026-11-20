@@ -801,16 +801,30 @@
             renderAllPostLists(lang);
         }
 
+        async function fetchWithFallback(primaryUrl, fallbackUrl) {
+            try {
+                const res = await fetch(primaryUrl);
+                if (res.ok) {
+                    const data = await res.json();
+                    if (data !== null && data !== undefined) return data;
+                }
+            } catch {
+                // Fall back to local file
+            }
+            const fallbackRes = await fetch(fallbackUrl);
+            return fallbackRes.ok ? await fallbackRes.json() : null;
+        }
+
         async function init() {
             try {
                 const cacheBust = Date.now();
-                const [transRes, postsRes, reactRes] = await Promise.all([
-                    fetch(`data/translations.json?v=${cacheBust}`),
-                    fetch(`data/posts.json?v=${cacheBust}`),
+                const [transData, postsData, reactRes] = await Promise.all([
+                    fetchWithFallback(`${FIREBASE_DB_URL}/translations.json?v=${cacheBust}`, `data/translations.json?v=${cacheBust}`),
+                    fetchWithFallback(`${FIREBASE_DB_URL}/posts.json?v=${cacheBust}`, `data/posts.json?v=${cacheBust}`),
                     fetch(`${FIREBASE_DB_URL}/reactions.json?v=${cacheBust}`)
                 ]);
-                if (transRes.ok) TRANSLATIONS = await transRes.json();
-                if (postsRes.ok) POSTS = await postsRes.json();
+                if (transData) TRANSLATIONS = transData;
+                if (Array.isArray(postsData)) POSTS = postsData;
                 if (reactRes.ok) {
                     const reactData = await reactRes.json();
                     if (reactData && typeof reactData === 'object') {
