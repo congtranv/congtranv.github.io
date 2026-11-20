@@ -40,10 +40,10 @@ async function run() {
     }
 
     const existingPosts = JSON.parse(fs.readFileSync(POSTS_PATH, 'utf8'));
-    const manualPosts = existingPosts.filter(p => !String(p.id).startsWith('issue-'));
+    const postsMap = new Map(existingPosts.map(p => [p.id, p]));
 
     const issues = await fetchIssues();
-    const issuePosts = [];
+    let syncedCount = 0;
 
     for (const issue of issues) {
         const labelNames = issue.labels.map(l => l.name.toLowerCase());
@@ -66,16 +66,18 @@ async function run() {
             translateViToEn(viSummary)
         ]);
 
-        issuePosts.push({
-            id: `issue-${issue.number}`,
+        const id = `issue-${issue.number}`;
+        postsMap.set(id, {
+            id,
             type,
             date: postDate,
             vi: { title: viTitle, summary: viSummary },
             en: { title: enTitle, summary: enSummary }
         });
+        syncedCount++;
     }
 
-    const mergedPosts = [...issuePosts, ...manualPosts].sort((a, b) =>
+    const mergedPosts = Array.from(postsMap.values()).sort((a, b) =>
         b.date.localeCompare(a.date)
     );
 
@@ -87,7 +89,7 @@ async function run() {
     }
 
     fs.writeFileSync(POSTS_PATH, nextJson, 'utf8');
-    console.log(`Synced ${issuePosts.length} issue post(s) into data/posts.json.`);
+    console.log(`Synced ${syncedCount} issue post(s) into data/posts.json.`);
 }
 
 run();

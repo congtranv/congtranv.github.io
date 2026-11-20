@@ -1,5 +1,18 @@
 [
   {
+    "id": "foldable-rdp-client",
+    "type": "project",
+    "date": "2026-11-20",
+    "vi": {
+      "title": "Ứng dụng điều khiển máy tính từ xa cho điện thoại gập",
+      "summary": "Phát triển ứng dụng Android RDP Client tối ưu cho thiết bị màn hình gập.\nỨng dụng hỗ trợ chế độ bàn phím, touchpad ẩn và chuyển đổi linh hoạt giữa màn hình trong và màn hình ngoài.\nPhát hành phiên bản đầu tiên v1.0.0 lên GitHub. Tôi đang chuẩn bị để phát hành trên chợ ứng dụng."
+    },
+    "en": {
+      "title": "Foldable RDP Remote Desktop Client",
+      "summary": "Building an Android RDP client optimized for foldable devices.\nThe app supports keyboard mode, an invisible trackpad, and seamless switching between inner and cover screens.\nReleased the first version v1.0.0 on GitHub, and I am currently preparing to publish it on app stores."
+    }
+  },
+  {
     "id": "personal-portfolio-glass",
     "type": "project",
     "date": "2026-04-01",
