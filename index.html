@@ -793,11 +793,12 @@
             document.documentElement.lang = lang;
             i18nElements.forEach(el => {
                 const key = el.dataset.i18n;
-                if (dict[key] !== undefined) {
-                    el.textContent = dict[key];
+                const val = dict[key] !== undefined ? dict[key] : dict[key.replace(/\./g, '_')];
+                if (val !== undefined) {
+                    el.textContent = val;
                 }
             });
-            langLabel.textContent = dict['lang.button'];
+            langLabel.textContent = dict['lang.button'] || dict['lang_button'] || langLabel.textContent;
             renderAllPostLists(lang);
         }
 
