@@ -94,7 +94,8 @@
             max-width: calc(100% - 32px);
         }
 
-        .nav-menu button {
+        .nav-menu button,
+        .nav-menu a {
             background: transparent;
             border: 1px solid transparent;
             color: var(--text-color);
@@ -103,14 +104,19 @@
             cursor: pointer;
             font-size: 0.92rem;
             font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
             transition: background 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
         }
 
-        .nav-menu button:hover {
+        .nav-menu button:hover,
+        .nav-menu a:hover {
             background: var(--glass-bg-hover);
         }
 
-        .nav-menu button:active {
+        .nav-menu button:active,
+        .nav-menu a:active {
             transform: scale(0.96);
         }
 
@@ -365,6 +371,7 @@
             <button type="button" data-page="blog" data-i18n="nav.blog">Blog</button>
             <button type="button" data-page="projects" data-i18n="nav.projects">Dự án</button>
             <button type="button" data-page="about" data-i18n="nav.about">About</button>
+            <a href="foldable-rdp-privacy.html">Foldable RDP</a>
         </nav>
     </header>
 
