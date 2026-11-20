@@ -53,8 +53,14 @@ async function run() {
         else if (labelNames.includes('about')) type = 'about';
         if (!type) continue;
 
+        const rawBody = issue.body || '';
+        const dateMatch = rawBody.match(/^date:\s*(\d{4}-\d{2}-\d{2})\s*$/im);
+        const postDate = dateMatch ? dateMatch[1] : issue.created_at.slice(0, 10);
+
         const viTitle = issue.title.trim();
-        const viSummary = (issue.body || '').trim();
+        const viSummary = rawBody
+            .replace(/^date:.*$/im, '')
+            .trim();
         const [enTitle, enSummary] = await Promise.all([
             translateViToEn(viTitle),
             translateViToEn(viSummary)
@@ -63,7 +69,7 @@ async function run() {
         issuePosts.push({
             id: `issue-${issue.number}`,
             type,
-            date: issue.created_at.slice(0, 10),
+            date: postDate,
             vi: { title: viTitle, summary: viSummary },
             en: { title: enTitle, summary: enSummary }
         });
