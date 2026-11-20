@@ -362,6 +362,49 @@
             margin-left: 6px;
         }
 
+        .post-reactions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .reaction-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+        }
+
+        .reaction-btn:hover {
+            background: var(--glass-bg-hover);
+        }
+
+        .reaction-btn:active {
+            transform: scale(0.94);
+        }
+
+        .reaction-btn.active {
+            background: var(--nav-active-bg);
+            border-color: var(--glass-highlight);
+        }
+
+        .reaction-score {
+            min-width: 24px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
         #latest-posts-list,
         #blog-posts-list,
         #project-posts-list,
@@ -647,21 +690,76 @@
             return `${day}/${month}/${year}`;
         }
 
+        const FIREBASE_DB_URL = 'https://congtranv-blog-default-rtdb.asia-southeast1.firebasedatabase.app';
+        let GLOBAL_REACTIONS = {};
+
+        function getPostKey(post) {
+            return String(post.id || `${post.type}-${post.date}-${(post.vi && post.vi.title) || post.title || ''}`)
+                .replace(/[.#$\[\]\/]/g, '_');
+        }
+
+        function formatScore(score) {
+            return score > 0 ? `+${score}` : `${score}`;
+        }
+
         function renderPostCard(post, lang, collapsible = false, showTag = false) {
             const content = post[lang] || post.vi || { title: post.title, summary: post.body };
             const bodyHtml = formatBody(content.summary || '');
             const tagLabel = post.type === 'blog' ? '#blog' : (lang === 'en' ? '#project' : '#dự án');
             const tagHtml = showTag ? `<span class="post-tag">${tagLabel}</span>` : '';
+            const rawKey = getPostKey(post);
+            const postKey = escapeHtml(rawKey);
+            const score = (GLOBAL_REACTIONS[rawKey] && GLOBAL_REACTIONS[rawKey].score) || 0;
+            const reactionsHtml = (post.type === 'blog' || post.type === 'project') ? `
+                <div class="post-reactions" data-post-key="${postKey}">
+                    <button type="button" class="reaction-btn" data-vote="1" aria-label="Like">👍</button>
+                    <span class="reaction-score">${formatScore(score)}</span>
+                    <button type="button" class="reaction-btn" data-vote="-1" aria-label="Dislike">👎</button>
+                </div>
+            ` : '';
             return `
                 <article class="timeline-item${collapsible ? ' collapsible' : ''}">
                     <div class="post-header">
                         <h3>${escapeHtml(content.title)}${tagHtml}</h3>
                         <time class="post-date" datetime="${post.date}">${formatPostDate(post.date)}</time>
                     </div>
-                    <div class="post-body">${bodyHtml}</div>
+                    <div class="post-body">${bodyHtml}${reactionsHtml}</div>
                 </article>
             `;
         }
+
+        function syncReactionUI(postKey, score) {
+            document.querySelectorAll('.post-reactions').forEach(bar => {
+                if (bar.dataset.postKey !== postKey) return;
+                const scoreEl = bar.querySelector('.reaction-score');
+                if (scoreEl) scoreEl.textContent = formatScore(score);
+            });
+        }
+
+        document.addEventListener('click', async (e) => {
+            const btn = e.target.closest('.reaction-btn');
+            if (!btn) return;
+            const bar = btn.closest('.post-reactions');
+            if (!bar) return;
+
+            const postKey = bar.dataset.postKey;
+            const vote = Number(btn.dataset.vote);
+            const prevScore = (GLOBAL_REACTIONS[postKey] && GLOBAL_REACTIONS[postKey].score) || 0;
+            const nextScore = prevScore + vote;
+
+            GLOBAL_REACTIONS[postKey] = { score: nextScore };
+            syncReactionUI(postKey, nextScore);
+
+            try {
+                await fetch(`${FIREBASE_DB_URL}/reactions/${encodeURIComponent(postKey)}.json`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ score: nextScore })
+                });
+            } catch (err) {
+                console.error('Failed to sync reaction to Firebase:', err);
+            }
+        });
 
         function renderAllPostLists(lang) {
             const sorted = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
@@ -705,12 +803,19 @@
         async function init() {
             try {
                 const cacheBust = Date.now();
-                const [transRes, postsRes] = await Promise.all([
+                const [transRes, postsRes, reactRes] = await Promise.all([
                     fetch(`data/translations.json?v=${cacheBust}`),
-                    fetch(`data/posts.json?v=${cacheBust}`)
+                    fetch(`data/posts.json?v=${cacheBust}`),
+                    fetch(`${FIREBASE_DB_URL}/reactions.json?v=${cacheBust}`)
                 ]);
                 if (transRes.ok) TRANSLATIONS = await transRes.json();
                 if (postsRes.ok) POSTS = await postsRes.json();
+                if (reactRes.ok) {
+                    const reactData = await reactRes.json();
+                    if (reactData && typeof reactData === 'object') {
+                        GLOBAL_REACTIONS = reactData;
+                    }
+                }
             } catch (err) {
                 console.error('Failed to load data files:', err);
             }
