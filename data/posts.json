@@ -26,6 +26,19 @@
     }
   },
   {
+    "id": "issue-1",
+    "type": "blog",
+    "date": "2024-03-10",
+    "vi": {
+      "title": "Đón con trai đầu lòng",
+      "summary": "Hôm nay, vợ chồng tôi đã đón con trai đầu lòng chào đời. Hai mẹ con đã rất vất vả để bé đến với thế giới này vào 11h25"
+    },
+    "en": {
+      "title": "Welcoming the firstborn son",
+      "summary": "Today, my wife and I welcomed the birth of our first son. Both mother and child worked very hard to bring the baby into this world at 11:25 AM."
+    }
+  },
+  {
     "id": "automotive-ivi-notes",
     "type": "blog",
     "date": "2023-10-03",
