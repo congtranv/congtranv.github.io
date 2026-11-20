@@ -13,6 +13,19 @@
     }
   },
   {
+    "id": "issue-2",
+    "type": "blog",
+    "date": "2026-11-20",
+    "vi": {
+      "title": "Làm bạn với A.I",
+      "summary": "Gần đây tôi đã làm bạn với A.I nhiều hơn. Tận dụng sức mạnh của A.I và các dự án của mình nhiều hơn.\n\nNhưng tôi cũng lo lắng mình sẽ bị phụ thuộc vào A.I quá nhiều."
+    },
+    "en": {
+      "title": "Becoming friends with A.I.",
+      "summary": "Recently, I've been befriending A.I. more. I've been leveraging the power of A.I. more in my projects.\n\nBut I'm also worried that I'll become too dependent on A.I."
+    }
+  },
+  {
     "id": "personal-portfolio-glass",
     "type": "project",
     "date": "2026-04-01",
