@@ -26,6 +26,19 @@
     }
   },
   {
+    "id": "issue-4",
+    "type": "project",
+    "date": "2026-11-16",
+    "vi": {
+      "title": "Máy chủ tải video",
+      "summary": "Xây dựng một dịch vụ chạy ngầm trên laptop Ubuntu, cung cấp giao diện web cục bộ truy cập qua Tailscale. \n\nWebsite hỗ trợ dán các đường dẫn liên kết video và đẩy vào hàng đợi. \n\nTrên back-end sẽ đẩy lần lượt các đường dẫn vào công cụ tải yt-dlp, hỗ trợ hai luồng tải song song.\n\nVideo tải xong sẽ có thông báo qua Telegram bot: tình trạng tải xong hay có gặp lỗi gì không, dung lượng video đã tải và dung lượng ổ đĩa lưu trữ còn trống."
+    },
+    "en": {
+      "title": "Video hosting server",
+      "summary": "Build a background service on an Ubuntu laptop that provides a local web interface accessible via Tailscale. \n\nThe website supports pasting video links and adding them to the queue. \n\nOn the back-end, the URLs will be pushed one by one into the yt-dlp download tool, which supports two parallel download threads.\n\nOnce the video is downloaded, a notification will be sent via Telegram bot: whether the download is complete or if there are any errors, the size of the downloaded video, and the available storage space on the drive."
+    }
+  },
+  {
     "id": "issue-3",
     "type": "project",
     "date": "2026-10-22",
