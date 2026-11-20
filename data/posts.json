@@ -1,0 +1,41 @@
+[
+  {
+    "id": "personal-portfolio-glass",
+    "type": "project",
+    "date": "2026-04-01",
+    "vi": {
+      "title": "Thiết kế Portfolio phong cách Liquid Glass",
+      "summary": "Xây dựng trang cá nhân tối giản với hiệu ứng kính mờ và hỗ trợ song ngữ Việt - Anh."
+    },
+    "en": {
+      "title": "Liquid Glass Personal Portfolio",
+      "summary": "Building a minimalist personal website with glassmorphism effects and Vietnamese - English support."
+    }
+  },
+  {
+    "id": "auto-smart-home",
+    "type": "project",
+    "date": "2026-02-24",
+    "vi": {
+      "title": "Dự án tự động hóa nhà thông minh",
+      "summary": "Xây dựng kịch bản tự động hóa thiết bị trong nhà bằng cảm biến và lịch trình thông minh."
+    },
+    "en": {
+      "title": "Smart Home Automation Project",
+      "summary": "Building home device automation scenarios using sensors and smart schedules."
+    }
+  },
+  {
+    "id": "automotive-ivi-notes",
+    "type": "blog",
+    "date": "2023-10-03",
+    "vi": {
+      "title": "Hôm nay tôi kết hôn <3",
+      "summary": "Sau khoảng thời gian tìm hiểu, tôi và vợ đã chính thức về chung một nhà."
+    },
+    "en": {
+      "title": "Today I got married <3",
+      "summary": "After our time together, my wife and I have officially tied the knot."
+    }
+  }
+]

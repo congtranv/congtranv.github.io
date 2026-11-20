@@ -1,114 +1,590 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trang cá nhân của Trần Văn Cộng - Kỹ sư phát triển phần mềm.">
     <title>Trần Văn Cộng - Portfolio</title>
     <style>
         :root {
-            --bg-start: #064e3b; --bg-end: #065f46;
-            --glass-bg: rgba(255, 255, 255, 0.1);
-            --glass-border: rgba(255, 255, 255, 0.2);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            --text-color: white;
+            --bg-start: #042f2e;
+            --bg-mid: #064e3b;
+            --bg-end: #065f46;
+            --orb-1: rgba(52, 211, 153, 0.25);
+            --orb-2: rgba(16, 185, 129, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-bg-hover: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-highlight: rgba(255, 255, 255, 0.35);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+            --text-color: #f0fdf4;
+            --text-muted: rgba(240, 253, 244, 0.8);
+            --accent-color: #6ee7b7;
+            --nav-active-bg: rgba(110, 231, 183, 0.22);
         }
-        body.material-you {
-            --bg-start: #4c0303; --bg-end: #7b0d0d;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-border: rgba(255, 255, 255, 0.3);
-            --glass-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            --text-color: #fce4e4;
-        }
-        body { margin: 0; min-height: 100vh; background: linear-gradient(135deg, var(--bg-start), var(--bg-end)); font-family: 'Segoe UI', sans-serif; color: var(--text-color); transition: all 0.5s ease; display: flex; flex-direction: column; align-items: center; padding-top: 80px; padding-bottom: 50px; }
-        
-        /* Base Liquid Glass card */
-        .glass-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 30px; box-shadow: var(--glass-shadow); text-align: center; width: 85%; max-width: 400px; border-top: 1px solid rgba(255,255,255,0.4); border-left: 1px solid rgba(255,255,255,0.4); margin-bottom: 20px; }
-        
-        .nav-menu { position: fixed; top: 20px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; z-index: 1000; }
-        .nav-menu button { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--text-color); padding: 8px 15px; border-radius: 20px; cursor: pointer; backdrop-filter: blur(10px); }
-        
-        #theme-toggle { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; border-radius: 30px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-color); cursor: pointer; backdrop-filter: blur(10px); z-index: 1000; }
-        
-        .page { display: none; flex-direction: column; align-items: center; width: 100%; }
-        .page.active { display: flex; }
 
-        /* Timeline Items as Glass Cards */
-        .timeline-item { background: var(--glass-bg); backdrop-filter: blur(15px); border: 1px solid var(--glass-border); 
-                         padding: 20px; border-radius: 25px; text-align: left;
-                         box-shadow: var(--glass-shadow); border-top: 1px solid rgba(255,255,255,0.3); 
-                         width: 85%; max-width: 400px; margin-bottom: 20px; }
-        .timeline-item h3 { margin: 0 0 5px 0; font-size: 1.1em; color: #ff4d4d; }
-        .timeline-item p { margin: 0; font-size: 0.9em; opacity: 0.9; }
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+            background-attachment: fixed;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            transition: background 0.5s ease, color 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 96px 16px 88px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient background orbs for richer glass refraction */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+            transition: background 0.5s ease;
+        }
+
+        body::before {
+            width: 360px;
+            height: 360px;
+            top: -80px;
+            left: -80px;
+            background: var(--orb-1);
+        }
+
+        body::after {
+            width: 420px;
+            height: 420px;
+            bottom: -100px;
+            right: -100px;
+            background: var(--orb-2);
+        }
+
+        /* Navigation */
+        .nav-menu {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 6px;
+            border-radius: 999px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            z-index: 1000;
+            max-width: calc(100% - 32px);
+        }
+
+        .nav-menu button {
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: background 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
+        }
+
+        .nav-menu button:hover {
+            background: var(--glass-bg-hover);
+        }
+
+        .nav-menu button:active {
+            transform: scale(0.96);
+        }
+
+        .nav-menu button.active {
+            background: var(--nav-active-bg);
+            border-color: var(--glass-highlight);
+            font-weight: 600;
+        }
+
+        .nav-menu button:focus-visible,
+        #lang-toggle:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        /* Main Container & Pages */
+        main {
+            width: 100%;
+            max-width: 560px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            gap: 18px;
+        }
+
+        .page.active {
+            display: flex;
+            animation: fadeSlideIn 0.35s ease forwards;
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Base Liquid Glass Card */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-top-color: var(--glass-highlight);
+            border-left-color: var(--glass-highlight);
+            border-radius: 28px;
+            padding: 32px 28px;
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+            width: 100%;
+        }
+
+        .glass-card h1 {
+            margin: 0 0 10px;
+            font-size: 1.85rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .glass-card .subtitle {
+            margin: 0;
+            font-size: 1.05rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .glass-card p {
+            margin: 10px 0 0;
+            color: var(--text-muted);
+        }
+
+        /* Timeline Items */
+        .timeline {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        .timeline-item {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-top-color: var(--glass-highlight);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px 24px;
+            border-radius: 22px;
+            text-align: left;
+            box-shadow: var(--glass-shadow);
+            width: 100%;
+            transition: transform 0.2s ease, background 0.25s ease;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-2px);
+            background: var(--glass-bg-hover);
+        }
+
+        .timeline-item h3 {
+            margin: 0 0 6px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .timeline-item p {
+            margin: 2px 0 0;
+            font-size: 0.94rem;
+            color: var(--text-muted);
+        }
+
+        .timeline-item .role {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        /* Latest Posts on Home */
+        .latest-posts {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 6px;
+        }
+
+        .section-heading {
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-color);
+            text-align: left;
+            padding-left: 4px;
+        }
+
+        .post-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .post-header h3 {
+            margin: 0;
+        }
+
+        .post-date {
+            font-size: 0.78rem;
+            font-style: italic;
+            color: var(--text-muted);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .post-body {
+            margin: 6px 0 0;
+            font-size: 0.94rem;
+            color: var(--text-muted);
+        }
+
+        .post-body h4 {
+            margin: 8px 0 4px;
+            font-size: 0.98rem;
+            color: var(--text-color);
+        }
+
+        .post-body ul {
+            margin: 4px 0;
+            padding-left: 18px;
+        }
+
+        /* Language Toggle Button */
+        #lang-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--glass-border);
+            border-top-color: var(--glass-highlight);
+            background: var(--glass-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: var(--glass-shadow);
+            font-size: 0.88rem;
+            font-weight: 500;
+            z-index: 1000;
+            transition: background 0.25s ease, transform 0.15s ease;
+        }
+
+        #lang-toggle:hover {
+            background: var(--glass-bg-hover);
+        }
+
+        #lang-toggle:active {
+            transform: scale(0.96);
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 88px;
+            }
+
+            .glass-card {
+                padding: 26px 20px;
+                border-radius: 24px;
+            }
+
+            .glass-card h1 {
+                font-size: 1.55rem;
+            }
+
+            .nav-menu button {
+                padding: 7px 12px;
+                font-size: 0.86rem;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <div class="nav-menu">
-        <button onclick="showPage('home')">Trang chủ</button>
-        <button onclick="showPage('blog')">Blog</button>
-        <button onclick="showPage('projects')">Dự án</button>
-        <button onclick="showPage('about')">About</button>
-    </div>
+    <header>
+        <nav class="nav-menu" aria-label="Điều hướng chính">
+            <button type="button" class="active" data-page="home" data-i18n="nav.home" aria-current="page">Trang
+                chủ</button>
+            <button type="button" data-page="blog" data-i18n="nav.blog">Blog</button>
+            <button type="button" data-page="projects" data-i18n="nav.projects">Dự án</button>
+            <button type="button" data-page="about" data-i18n="nav.about">About</button>
+        </nav>
+    </header>
 
-    <div id="home" class="page active">
-        <div class="glass-card">
-            <h1>Trần Văn Cộng</h1>
-            <p>Kỹ sư phát triển phần mềm</p>
-        </div>
-    </div>
-    <div id="blog" class="page"><div class="glass-card"><h1>Blog</h1><p>Coming soon...</p></div></div>
-    <div id="projects" class="page"><div class="glass-card"><h1>Dự án</h1><p>Coming soon...</p></div></div>
-    
-    <div id="about" class="page">
-        <!-- Intro Card -->
-        <div class="glass-card">
-            <h1>Về tôi</h1>
-            <p>Xin chào, tôi là Cộng. Hiện tại tôi đang tham gia phát triển phần mềm cho hệ thống thông tin giải trí của ô tô.</p>
-            <p>Bên cạnh đó tôi cũng tự tìm hiểu và xây dựng cho bản thân các giải pháp tự động hóa thông minh.</p>
-        </div>
-        
-        <!-- Timeline Items -->
-        <div class="timeline-item">
-            <h3>2022 - Nay</h3>
-            <p>Kỹ sư phát triển phần mềm</p>
-            <p>Công ty TNHH Phần mềm FPT</p>
-        </div>
-        <div class="timeline-item">
-            <h3>2022</h3>
-            <p>Tốt nghiệp Đại học Bách Khoa Hà Nội</p>
-            <p>Chuyên ngành: Kỹ thuật Điện tử</p>
-            <p>Trình độ đào tạo: Thạc sĩ Khoa học</p>
-        </div>
-        <div class="timeline-item">
-            <h3>2020</h3>
-            <p>Trúng tuyển Thạc sĩ Đại học Bách Khoa Hà Nội</p>
-        </div>
-        <div class="timeline-item">
-            <h3>2020</h3>
-            <p>Tốt nghiệp Đại học Bách Khoa Hà Nội</p>
-            <p>Chuyên ngành: Kỹ thuật Điện tử - Kỹ thuật máy tính</p>
-            <p>Trình độ đào tạo: Kỹ sư</p>
-        </div>
-        <div class="timeline-item">
-            <h3>2016 - 2018</h3>
-            <p>Thực tập sinh và Nhân viên học việc</p>
-            <p>Công ty TNHH Bkav SmartHome</p>
-        </div>
-        <div class="timeline-item">
-            <h3>2014</h3>
-            <p>Trúng tuyển Đại học Bách Khoa Hà Nội</p>
-        </div>
-    </div>
+    <main>
+        <section id="home" class="page active">
+            <div class="glass-card">
+                <h1 data-i18n="home.name">Trần Văn Cộng</h1>
+                <p class="subtitle" data-i18n="home.role">Kỹ sư phát triển phần mềm</p>
+            </div>
 
-    <button id="theme-toggle">Chuyển Giao Diện</button>
+            <div class="latest-posts">
+                <h2 class="section-heading" data-i18n="home.latestPosts">Bài viết mới</h2>
+                <div id="latest-posts-list" class="post-list"></div>
+            </div>
+        </section>
+
+        <section id="blog" class="page">
+            <div id="blog-posts-list" class="post-list"></div>
+        </section>
+
+        <section id="projects" class="page">
+            <div id="project-posts-list" class="post-list"></div>
+        </section>
+
+        <section id="about" class="page">
+            <div class="glass-card">
+                <h1 data-i18n="about.title">Về tôi</h1>
+                <p data-i18n="about.intro1">Xin chào, tôi là Cộng. Hiện tại tôi đang tham gia phát triển phần mềm cho hệ
+                    thống thông tin giải trí của ô tô.</p>
+                <p data-i18n="about.intro2">Bên cạnh đó tôi cũng tự tìm hiểu và xây dựng cho bản thân các giải pháp tự
+                    động hóa thông minh.</p>
+            </div>
+
+            <div class="timeline">
+                <article class="timeline-item">
+                    <h3 data-i18n="timeline.0.time">2022 - Nay</h3>
+                    <p class="role" data-i18n="timeline.0.role">Kỹ sư phát triển phần mềm</p>
+                    <p data-i18n="timeline.0.org">Công ty TNHH Phần mềm FPT</p>
+                </article>
+                <article class="timeline-item">
+                    <h3 data-i18n="timeline.1.time">2022</h3>
+                    <p class="role" data-i18n="timeline.1.role">Tốt nghiệp Đại học Bách Khoa Hà Nội</p>
+                    <p data-i18n="timeline.1.major">Chuyên ngành: Kỹ thuật Điện tử</p>
+                    <p data-i18n="timeline.1.degree">Trình độ đào tạo: Thạc sĩ Khoa học</p>
+                </article>
+                <article class="timeline-item">
+                    <h3 data-i18n="timeline.2.time">2020</h3>
+                    <p class="role" data-i18n="timeline.2.role">Trúng tuyển Thạc sĩ Đại học Bách Khoa Hà Nội</p>
+                </article>
+                <article class="timeline-item">
+                    <h3 data-i18n="timeline.3.time">2020</h3>
+                    <p class="role" data-i18n="timeline.3.role">Tốt nghiệp Đại học Bách Khoa Hà Nội</p>
+                    <p data-i18n="timeline.3.major">Chuyên ngành: Kỹ thuật Điện tử - Kỹ thuật máy tính</p>
+                    <p data-i18n="timeline.3.degree">Trình độ đào tạo: Kỹ sư</p>
+                </article>
+                <article class="timeline-item">
+                    <h3 data-i18n="timeline.4.time">2016 - 2018</h3>
+                    <p class="role" data-i18n="timeline.4.role">Thực tập sinh và Nhân viên học việc</p>
+                    <p data-i18n="timeline.4.org">Công ty TNHH Bkav SmartHome</p>
+                </article>
+                <article class="timeline-item">
+                    <h3 data-i18n="timeline.5.time">2014</h3>
+                    <p class="role" data-i18n="timeline.5.role">Trúng tuyển Đại học Bách Khoa Hà Nội</p>
+                </article>
+            </div>
+            <div id="about-posts-list" class="post-list"></div>
+        </section>
+    </main>
+
+    <button id="lang-toggle" type="button" aria-label="Chuyển đổi ngôn ngữ">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M2 12h20"></path>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span id="lang-label">Ngôn ngữ: Tiếng Việt</span>
+    </button>
 
     <script>
+        let TRANSLATIONS = { vi: {}, en: {} };
+        let POSTS = [];
+
+        const navButtons = document.querySelectorAll('.nav-menu button[data-page]');
+        const pages = document.querySelectorAll('.page');
+        const langToggle = document.getElementById('lang-toggle');
+        const langLabel = document.getElementById('lang-label');
+        const i18nElements = document.querySelectorAll('[data-i18n]');
+
         function showPage(pageId) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+            pages.forEach(p => p.classList.toggle('active', p.id === pageId));
+            navButtons.forEach(btn => {
+                const isActive = btn.dataset.page === pageId;
+                btn.classList.toggle('active', isActive);
+                if (isActive) {
+                    btn.setAttribute('aria-current', 'page');
+                } else {
+                    btn.removeAttribute('aria-current');
+                }
+            });
         }
-        document.getElementById('theme-toggle').addEventListener('click', () => {
-            document.body.classList.toggle('material-you');
+
+        navButtons.forEach(btn => {
+            btn.addEventListener('click', () => showPage(btn.dataset.page));
+        });
+
+        const latestPostsList = document.getElementById('latest-posts-list');
+        const blogPostsList = document.getElementById('blog-posts-list');
+        const projectPostsList = document.getElementById('project-posts-list');
+        const aboutPostsList = document.getElementById('about-posts-list');
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function formatBody(rawText) {
+            const lines = escapeHtml(rawText).split('\n');
+            let html = '';
+            let inList = false;
+
+            for (const line of lines) {
+                const trimmed = line.trim();
+                const formatted = trimmed
+                    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+                if (trimmed.startsWith('- ')) {
+                    if (!inList) {
+                        html += '<ul>';
+                        inList = true;
+                    }
+                    html += `<li>${formatted.slice(2)}</li>`;
+                } else {
+                    if (inList) {
+                        html += '</ul>';
+                        inList = false;
+                    }
+                    if (trimmed.startsWith('## ')) {
+                        html += `<h4>${formatted.slice(3)}</h4>`;
+                    } else if (trimmed) {
+                        html += `<p>${formatted}</p>`;
+                    }
+                }
+            }
+            if (inList) html += '</ul>';
+            return html;
+        }
+
+        function formatPostDate(isoDate) {
+            const [year, month, day] = isoDate.split('-');
+            return `${day}/${month}/${year}`;
+        }
+
+        function renderPostCard(post, lang) {
+            const content = post[lang] || post.vi || { title: post.title, summary: post.body };
+            const bodyHtml = formatBody(content.summary || '');
+            return `
+                <article class="timeline-item">
+                    <div class="post-header">
+                        <h3>${escapeHtml(content.title)}</h3>
+                        <time class="post-date" datetime="${post.date}">${formatPostDate(post.date)}</time>
+                    </div>
+                    <div class="post-body">${bodyHtml}</div>
+                </article>
+            `;
+        }
+
+        function renderAllPostLists(lang) {
+            const sorted = [...POSTS].sort((a, b) => b.date.localeCompare(a.date));
+            latestPostsList.innerHTML = sorted
+                .filter(p => p.type === 'blog' || p.type === 'project')
+                .slice(0, 3)
+                .map(p => renderPostCard(p, lang))
+                .join('');
+            blogPostsList.innerHTML = sorted.filter(p => p.type === 'blog').map(p => renderPostCard(p, lang)).join('');
+            projectPostsList.innerHTML = sorted.filter(p => p.type === 'project').map(p => renderPostCard(p, lang)).join('');
+            aboutPostsList.innerHTML = sorted.filter(p => p.type === 'about').map(p => renderPostCard(p, lang)).join('');
+        }
+
+        let currentLang = localStorage.getItem('portfolio-lang') === 'en' ? 'en' : 'vi';
+
+        function applyLanguage(lang) {
+            const dict = TRANSLATIONS[lang] || TRANSLATIONS.vi;
+            document.documentElement.lang = lang;
+            i18nElements.forEach(el => {
+                const key = el.dataset.i18n;
+                if (dict[key] !== undefined) {
+                    el.textContent = dict[key];
+                }
+            });
+            langLabel.textContent = dict['lang.button'];
+            renderAllPostLists(lang);
+        }
+
+        async function init() {
+            try {
+                const [transRes, postsRes] = await Promise.all([
+                    fetch('data/translations.json'),
+                    fetch('data/posts.json')
+                ]);
+                if (transRes.ok) TRANSLATIONS = await transRes.json();
+                if (postsRes.ok) POSTS = await postsRes.json();
+            } catch (err) {
+                console.error('Failed to load data files:', err);
+            }
+            applyLanguage(currentLang);
+        }
+
+        init();
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'vi' ? 'en' : 'vi';
+            applyLanguage(currentLang);
+            localStorage.setItem('portfolio-lang', currentLang);
         });
     </script>
 </body>
+
 </html>
