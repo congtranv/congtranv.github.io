@@ -20,10 +20,21 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Fetch current posts from Firebase
+        run: |
+          mkdir -p data
+          curl -fsS "https://congtranv-blog-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json" -o data/posts.json
+          if [ "$(cat data/posts.json)" = "null" ] || [ ! -s data/posts.json ]; then
+            echo "[]" > data/posts.json
+          fi
+
       - name: Sync issues to data/posts.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node .github/scripts/sync-issues.mjs
+
+      - name: Translate missing English posts
+        run: node .github/scripts/translate-posts.mjs
 
       - name: Sync posts to Firebase
         env:
