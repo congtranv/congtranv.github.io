@@ -801,30 +801,22 @@
             renderAllPostLists(lang);
         }
 
-        async function fetchWithFallback(primaryUrl, fallbackUrl) {
-            try {
-                const res = await fetch(primaryUrl);
-                if (res.ok) {
-                    const data = await res.json();
-                    if (data !== null && data !== undefined) return data;
-                }
-            } catch {
-                // Fall back to local file
-            }
-            const fallbackRes = await fetch(fallbackUrl);
-            return fallbackRes.ok ? await fallbackRes.json() : null;
-        }
-
         async function init() {
             try {
                 const cacheBust = Date.now();
-                const [transData, postsData, reactRes] = await Promise.all([
-                    fetchWithFallback(`${FIREBASE_DB_URL}/translations.json?v=${cacheBust}`, `data/translations.json?v=${cacheBust}`),
-                    fetchWithFallback(`${FIREBASE_DB_URL}/posts.json?v=${cacheBust}`, `data/posts.json?v=${cacheBust}`),
+                const [transRes, postsRes, reactRes] = await Promise.all([
+                    fetch(`${FIREBASE_DB_URL}/translations.json?v=${cacheBust}`),
+                    fetch(`${FIREBASE_DB_URL}/posts.json?v=${cacheBust}`),
                     fetch(`${FIREBASE_DB_URL}/reactions.json?v=${cacheBust}`)
                 ]);
-                if (transData) TRANSLATIONS = transData;
-                if (Array.isArray(postsData)) POSTS = postsData;
+                if (transRes.ok) {
+                    const transData = await transRes.json();
+                    if (transData) TRANSLATIONS = transData;
+                }
+                if (postsRes.ok) {
+                    const postsData = await postsRes.json();
+                    if (Array.isArray(postsData)) POSTS = postsData;
+                }
                 if (reactRes.ok) {
                     const reactData = await reactRes.json();
                     if (reactData && typeof reactData === 'object') {
@@ -832,7 +824,7 @@
                     }
                 }
             } catch (err) {
-                console.error('Failed to load data files:', err);
+                console.error('Failed to load data from Firebase:', err);
             }
             applyLanguage(currentLang);
         }
