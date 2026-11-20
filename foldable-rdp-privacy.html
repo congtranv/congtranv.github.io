@@ -160,6 +160,18 @@
             width: 100%;
         }
 
+        .content-card {
+            cursor: pointer;
+        }
+
+        .content-card:not(.expanded) > :not(h2) {
+            display: none;
+        }
+
+        .content-card:not(.expanded) h2 {
+            margin-bottom: 0;
+        }
+
         .content-card h2 {
             margin: 0 0 10px;
             font-size: 1.12rem;
@@ -444,6 +456,22 @@
         .lightbox-next {
             right: 18px;
         }
+
+        .cards-scroll {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            max-height: 50vh;
+            overflow-y: auto;
+            padding: 14px 2px;
+            scrollbar-width: none;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20px, black calc(100% - 20px), transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 20px, black calc(100% - 20px), transparent 100%);
+        }
+
+        .cards-scroll::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 
@@ -462,6 +490,7 @@
                 màn hình gập.</p>
         </section>
 
+        <div class="cards-scroll">
         <article class="content-card">
             <h2 data-i18n="app.overviewTitle">Giới thiệu ứng dụng</h2>
             <p data-i18n="app.fullDesc">Foldable RDP Client là ứng dụng điều khiển máy tính Windows từ xa (Remote
@@ -567,6 +596,7 @@
                     Windows qua giao thức RDP.</li>
             </ul>
         </article>
+        </div>
     </main>
 
     <button id="lang-toggle" type="button" aria-label="Chuyển đổi ngôn ngữ">
@@ -829,6 +859,20 @@
 
             document.addEventListener('mouseup', (e) => {
                 if (e.button === 0) endSwipe(e.clientX, e.clientY);
+            });
+        })();
+
+        (function () {
+            const cards = document.querySelectorAll('.content-card');
+            cards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('a, button, .app-gallery-item')) return;
+                    const wasExpanded = card.classList.contains('expanded');
+                    cards.forEach(c => c.classList.remove('expanded'));
+                    if (!wasExpanded) {
+                        card.classList.add('expanded');
+                    }
+                });
             });
         })();
     </script>
