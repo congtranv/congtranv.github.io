@@ -26,6 +26,19 @@
     }
   },
   {
+    "id": "issue-3",
+    "type": "project",
+    "date": "2026-10-22",
+    "vi": {
+      "title": "Điều khiển máy tính từ xa KVM web",
+      "summary": "Xây dựng một hệ thống KVM tận dụng laltop cũ:\n\n- Tailscale làm nền tảng mạng kết nối\n- ustreamer để phát hình ảnh thu được từ capture card\n- Back-end và front-end website bằng python và CSS nhận sự kiện chuột phím\n- STM32 chạy firware giả lập chuột phím HID\n\nPhần cứng sử dụng:\n- Laptop cũ chạy Ubuntu\n- STM32F103C8T6\n- USB capture card Ugreen\n\nLuồng điều khiển:\n- Laptop Ubuntu nhận hình ảnh từ máy tính cần điều khiển qua HDMI + Capture card\n- ustreamer phát hình ảnh đó lên giao diện web điều khiển\n- Sự kiện chuột và bàn phím từ giao diện web điều khiển gửi xuống được gửi qua STM32 giả lập HID sang máy tính cần điều khiển"
+    },
+    "en": {
+      "title": "KVM web remote computer control",
+      "summary": "Xây dựng một hệ thống KVM tận dụng laltop cũ:\n\n- Tailscale làm nền tảng mạng kết nối\n- ustreamer để phát hình ảnh thu được từ capture card\n- Back-end và front-end website bằng python và CSS nhận sự kiện chuột phím\n- STM32 chạy firware giả lập chuột phím HID\n\nPhần cứng sử dụng:\n- Laptop cũ chạy Ubuntu\n- STM32F103C8T6\n- USB capture card Ugreen\n\nLuồng điều khiển:\n- Laptop Ubuntu nhận hình ảnh từ máy tính cần điều khiển qua HDMI + Capture card\n- ustreamer phát hình ảnh đó lên giao diện web điều khiển\n- Sự kiện chuột và bàn phím từ giao diện web điều khiển gửi xuống được gửi qua STM32 giả lập HID sang máy tính cần điều khiển"
+    }
+  },
+  {
     "id": "personal-portfolio-glass",
     "type": "project",
     "date": "2026-04-01",
