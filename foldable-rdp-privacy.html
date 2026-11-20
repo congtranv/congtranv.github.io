@@ -190,6 +190,37 @@
             color: var(--text-color);
         }
 
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 10px 20px;
+            border-radius: 999px;
+            background: var(--nav-active-bg);
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--glass-bg-hover);
+        }
+
+        .download-btn:active {
+            transform: scale(0.96);
+        }
+
+        .release-meta {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
         #lang-toggle {
             position: fixed;
             bottom: 20px;
@@ -284,6 +315,13 @@
         </article>
 
         <article class="content-card">
+            <h2 data-i18n="release.title">Phiên bản mới nhất</h2>
+            <div id="release-info">
+                <p data-i18n="release.loading">Đang tải thông tin bản phát hành...</p>
+            </div>
+        </article>
+
+        <article class="content-card">
             <h2 data-i18n="privacy.title">Chính sách quyền riêng tư (Privacy Policy)</h2>
             <ul>
                 <li data-i18n="privacy.1">Ứng dụng không thu thập, lưu trữ hay chia sẻ bất kỳ dữ liệu cá nhân nào lên
@@ -322,6 +360,11 @@
                 'feat.3.desc': 'Tích hợp bàn phím ảo và chế độ toàn màn hình tối ưu không gian hiển thị.',
                 'feat.4.title': 'Kết nối trực tiếp & bảo mật:',
                 'feat.4.desc': 'Kết nối thẳng tới máy tính của bạn qua giao thức RDP, không qua máy chủ trung gian.',
+                'release.title': 'Phiên bản mới nhất',
+                'release.loading': 'Đang tải thông tin bản phát hành...',
+                'release.error': 'Chưa có bản phát hành công khai hoặc không thể tải thông tin.',
+                'release.download': 'Tải APK',
+                'release.view': 'Xem trên GitHub',
                 'privacy.title': 'Chính sách quyền riêng tư',
                 'privacy.1': 'Ứng dụng không thu thập, lưu trữ hay chia sẻ bất kỳ dữ liệu cá nhân nào lên máy chủ bên thứ ba.',
                 'privacy.2': 'Thông tin kết nối (IP/Host, tài khoản) chỉ được lưu cục bộ trên thiết bị của người dùng.',
@@ -342,6 +385,11 @@
                 'feat.3.desc': 'Built-in virtual keyboard support and fullscreen mode for maximum workspace.',
                 'feat.4.title': 'Direct & Private:',
                 'feat.4.desc': 'Connects directly to your Windows PC over RDP with no intermediate servers.',
+                'release.title': 'Latest Release',
+                'release.loading': 'Loading latest release info...',
+                'release.error': 'No public release found or unable to load release info.',
+                'release.download': 'Download APK',
+                'release.view': 'View on GitHub',
                 'privacy.title': 'Privacy Policy',
                 'privacy.1': 'The app does not collect, store, or share any personal data with third-party servers.',
                 'privacy.2': 'Connection details (IP/Host, credentials) are stored locally on the user\'s device only.',
@@ -355,6 +403,51 @@
         const i18nElements = document.querySelectorAll('[data-i18n]');
         let currentLang = localStorage.getItem('portfolio-lang') === 'en' ? 'en' : 'vi';
 
+        const RELEASE_REPO = 'congtranv/foldable-rdp-releases';
+        const releaseInfoEl = document.getElementById('release-info');
+        let latestReleaseData = null;
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function renderRelease(lang) {
+            const dict = TRANSLATIONS[lang] || TRANSLATIONS.vi;
+            if (!latestReleaseData) {
+                releaseInfoEl.innerHTML = `<p>${dict['release.error']}</p>`;
+                return;
+            }
+            const tag = escapeHtml(latestReleaseData.tag_name || '');
+            const date = latestReleaseData.published_at
+                ? latestReleaseData.published_at.slice(0, 10).split('-').reverse().join('/')
+                : '';
+            const apkAsset = (latestReleaseData.assets || []).find(a => a.name.toLowerCase().endsWith('.apk'));
+            const downloadUrl = apkAsset ? apkAsset.browser_download_url : latestReleaseData.html_url;
+            const btnText = apkAsset ? `${dict['release.download']} (${escapeHtml(apkAsset.name)})` : dict['release.view'];
+            const notes = latestReleaseData.body ? escapeHtml(latestReleaseData.body).replace(/\n/g, '<br>') : '';
+
+            releaseInfoEl.innerHTML = `
+                <div class="release-meta">${tag}${date ? ` · ${date}` : ''}</div>
+                ${notes ? `<p>${notes}</p>` : ''}
+                <a class="download-btn" href="${downloadUrl}" target="_blank" rel="noopener noreferrer">${btnText}</a>
+            `;
+        }
+
+        async function fetchLatestRelease() {
+            try {
+                const res = await fetch(`https://api.github.com/repos/${RELEASE_REPO}/releases/latest`);
+                if (!res.ok) throw new Error('Release fetch failed');
+                latestReleaseData = await res.json();
+            } catch {
+                latestReleaseData = null;
+            }
+            renderRelease(currentLang);
+        }
+
         function applyLanguage(lang) {
             const dict = TRANSLATIONS[lang] || TRANSLATIONS.vi;
             document.documentElement.lang = lang;
@@ -365,9 +458,13 @@
                 }
             });
             langLabel.textContent = dict['lang.button'];
+            if (latestReleaseData !== null) {
+                renderRelease(lang);
+            }
         }
 
         applyLanguage(currentLang);
+        fetchLatestRelease();
 
         langToggle.addEventListener('click', () => {
             currentLang = currentLang === 'vi' ? 'en' : 'vi';
