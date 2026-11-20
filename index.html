@@ -496,6 +496,65 @@
             btn.addEventListener('click', () => showPage(btn.dataset.page));
         });
 
+        const pageOrder = Array.from(navButtons).map(btn => btn.dataset.page);
+        let swipeStartX = 0;
+        let swipeStartY = 0;
+        let swipeStartTime = 0;
+        let isSwiping = false;
+
+        function startSwipe(x, y) {
+            swipeStartX = x;
+            swipeStartY = y;
+            swipeStartTime = Date.now();
+            isSwiping = true;
+        }
+
+        function endSwipe(x, y) {
+            if (!isSwiping) return;
+            isSwiping = false;
+
+            const dx = x - swipeStartX;
+            const dy = y - swipeStartY;
+            const elapsed = Date.now() - swipeStartTime;
+
+            if (elapsed > 600 || Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) {
+                return;
+            }
+
+            if (window.getSelection) {
+                window.getSelection().removeAllRanges();
+            }
+
+            const activeBtn = document.querySelector('.nav-menu button[data-page].active');
+            const currentIndex = activeBtn ? pageOrder.indexOf(activeBtn.dataset.page) : 0;
+            const nextIndex = dx < 0 ? currentIndex + 1 : currentIndex - 1;
+
+            if (nextIndex >= 0 && nextIndex < pageOrder.length) {
+                showPage(pageOrder[nextIndex]);
+                if (window.scrollY > 0) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            } else if (nextIndex === pageOrder.length) {
+                window.location.href = 'foldable-rdp-privacy.html';
+            }
+        }
+
+        document.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) startSwipe(e.touches[0].clientX, e.touches[0].clientY);
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            if (e.changedTouches.length === 1) endSwipe(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+        }, { passive: true });
+
+        document.addEventListener('mousedown', (e) => {
+            if (e.button === 0) startSwipe(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (e.button === 0) endSwipe(e.clientX, e.clientY);
+        });
+
         const latestPostsList = document.getElementById('latest-posts-list');
         const blogPostsList = document.getElementById('blog-posts-list');
         const projectPostsList = document.getElementById('project-posts-list');

@@ -782,6 +782,55 @@
                 if (e.key === 'ArrowRight') showItem(currentIndex + 1);
             });
         })();
+
+        (function () {
+            let swipeStartX = 0;
+            let swipeStartY = 0;
+            let swipeStartTime = 0;
+            let isSwiping = false;
+
+            function startSwipe(x, y) {
+                swipeStartX = x;
+                swipeStartY = y;
+                swipeStartTime = Date.now();
+                isSwiping = true;
+            }
+
+            function endSwipe(x, y) {
+                if (!isSwiping) return;
+                isSwiping = false;
+
+                const modal = document.getElementById('lightbox-modal');
+                if (modal && modal.classList.contains('active')) return;
+
+                const dx = x - swipeStartX;
+                const dy = y - swipeStartY;
+                const elapsed = Date.now() - swipeStartTime;
+
+                if (elapsed <= 600 && dx >= 50 && Math.abs(dx) >= Math.abs(dy) * 1.5) {
+                    if (window.getSelection) {
+                        window.getSelection().removeAllRanges();
+                    }
+                    window.location.href = 'index.html';
+                }
+            }
+
+            document.addEventListener('touchstart', (e) => {
+                if (e.touches.length === 1) startSwipe(e.touches[0].clientX, e.touches[0].clientY);
+            }, { passive: true });
+
+            document.addEventListener('touchend', (e) => {
+                if (e.changedTouches.length === 1) endSwipe(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
+            }, { passive: true });
+
+            document.addEventListener('mousedown', (e) => {
+                if (e.button === 0) startSwipe(e.clientX, e.clientY);
+            });
+
+            document.addEventListener('mouseup', (e) => {
+                if (e.button === 0) endSwipe(e.clientX, e.clientY);
+            });
+        })();
     </script>
 </body>
 
