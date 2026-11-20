@@ -360,157 +360,6 @@
                 font-size: 0.86rem;
             }
         }
-        /* Post Galleries */
-        .post-galleries {
-            margin-top: 16px;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-
-        .post-gallery-title {
-            margin: 0 0 10px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--accent-color);
-            letter-spacing: 0.01em;
-        }
-
-        .post-gallery-grid {
-            display: grid;
-            gap: 10px;
-        }
-
-        .post-gallery-grid--landscape {
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-        }
-
-        .post-gallery-grid--portrait {
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        }
-
-        .post-gallery-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--glass-border);
-            background: rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-            padding: 0;
-            display: block;
-            width: 100%;
-        }
-
-        .post-gallery-item:hover {
-            transform: translateY(-2px);
-            border-color: var(--glass-highlight);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
-        }
-
-        .post-gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .post-gallery-grid--landscape .post-gallery-item {
-            aspect-ratio: 1024 / 460;
-        }
-
-        .post-gallery-grid--portrait .post-gallery-item {
-            aspect-ratio: 951 / 1024;
-        }
-
-        /* Lightbox Modal */
-        .lightbox-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(2, 20, 18, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-            padding: 24px;
-        }
-
-        .lightbox-modal.active {
-            display: flex;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 92vw;
-            max-height: 88vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .lightbox-content img {
-            max-width: 90vw;
-            max-height: 80vh;
-            border-radius: 14px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-            object-fit: contain;
-        }
-
-        .lightbox-caption {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        .lightbox-close,
-        .lightbox-nav {
-            position: fixed;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            color: var(--text-color);
-            border-radius: 999px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .lightbox-close:hover,
-        .lightbox-nav:hover {
-            background: var(--glass-bg-hover);
-        }
-
-        .lightbox-close {
-            top: 20px;
-            right: 20px;
-            width: 42px;
-            height: 42px;
-            font-size: 1.4rem;
-            line-height: 1;
-        }
-
-        .lightbox-nav {
-            top: 50%;
-            transform: translateY(-50%);
-            width: 44px;
-            height: 44px;
-            font-size: 1.3rem;
-        }
-
-        .lightbox-prev {
-            left: 18px;
-        }
-
-        .lightbox-next {
-            right: 18px;
-        }
     </style>
 </head>
 
@@ -680,34 +529,9 @@
             return `${day}/${month}/${year}`;
         }
 
-        function renderGalleries(galleries, lang) {
-            if (!Array.isArray(galleries) || galleries.length === 0) return '';
-            const sections = galleries.map(gallery => {
-                const title = (gallery.title && (gallery.title[lang] || gallery.title.vi)) || '';
-                const layout = gallery.layout === 'portrait' ? 'portrait' : 'landscape';
-                const items = (gallery.images || []).map((src, idx) => {
-                    const safeSrc = escapeHtml(src);
-                    const safeTitle = escapeHtml(title);
-                    return `
-                        <button type="button" class="post-gallery-item" data-lightbox-src="${safeSrc}" data-lightbox-caption="${safeTitle} (${idx + 1}/${gallery.images.length})">
-                            <img src="${safeSrc}" alt="${safeTitle} ${idx + 1}" loading="lazy">
-                        </button>
-                    `;
-                }).join('');
-                return `
-                    <div class="post-gallery">
-                        ${title ? `<h4 class="post-gallery-title">${escapeHtml(title)}</h4>` : ''}
-                        <div class="post-gallery-grid post-gallery-grid--${layout}">${items}</div>
-                    </div>
-                `;
-            }).join('');
-            return `<div class="post-galleries">${sections}</div>`;
-        }
-
         function renderPostCard(post, lang) {
             const content = post[lang] || post.vi || { title: post.title, summary: post.body };
             const bodyHtml = formatBody(content.summary || '');
-            const galleriesHtml = renderGalleries(post.galleries, lang);
             return `
                 <article class="timeline-item">
                     <div class="post-header">
@@ -715,7 +539,6 @@
                         <time class="post-date" datetime="${post.date}">${formatPostDate(post.date)}</time>
                     </div>
                     <div class="post-body">${bodyHtml}</div>
-                    ${galleriesHtml}
                 </article>
             `;
         }
@@ -769,76 +592,6 @@
             applyLanguage(currentLang);
             localStorage.setItem('portfolio-lang', currentLang);
         });
-    </script>
-
-    <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true">
-        <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
-        <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous">&#8249;</button>
-        <div class="lightbox-content">
-            <img id="lightbox-img" src="" alt="">
-            <div id="lightbox-caption" class="lightbox-caption"></div>
-        </div>
-        <button type="button" class="lightbox-nav lightbox-next" aria-label="Next">&#8250;</button>
-    </div>
-
-    <script>
-        (function () {
-            const modal = document.getElementById('lightbox-modal');
-            const img = document.getElementById('lightbox-img');
-            const caption = document.getElementById('lightbox-caption');
-            const closeBtn = modal.querySelector('.lightbox-close');
-            const prevBtn = modal.querySelector('.lightbox-prev');
-            const nextBtn = modal.querySelector('.lightbox-next');
-
-            let currentItems = [];
-            let currentIndex = 0;
-
-            function showItem(index) {
-                if (!currentItems.length) return;
-                currentIndex = (index + currentItems.length) % currentItems.length;
-                const el = currentItems[currentIndex];
-                img.src = el.dataset.lightboxSrc;
-                img.alt = el.dataset.lightboxCaption || '';
-                caption.textContent = el.dataset.lightboxCaption || '';
-            }
-
-            function openLightbox(target) {
-                const gallery = target.closest('.post-gallery');
-                currentItems = gallery ? Array.from(gallery.querySelectorAll('.post-gallery-item')) : [target];
-                const idx = currentItems.indexOf(target);
-                showItem(idx >= 0 ? idx : 0);
-                modal.classList.add('active');
-                modal.setAttribute('aria-hidden', 'false');
-            }
-
-            function closeLightbox() {
-                modal.classList.remove('active');
-                modal.setAttribute('aria-hidden', 'true');
-                img.src = '';
-            }
-
-            document.addEventListener('click', (e) => {
-                const item = e.target.closest('.post-gallery-item');
-                if (item) {
-                    openLightbox(item);
-                }
-            });
-
-            closeBtn.addEventListener('click', closeLightbox);
-            prevBtn.addEventListener('click', () => showItem(currentIndex - 1));
-            nextBtn.addEventListener('click', () => showItem(currentIndex + 1));
-
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) closeLightbox();
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (!modal.classList.contains('active')) return;
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') showItem(currentIndex - 1);
-                if (e.key === 'ArrowRight') showItem(currentIndex + 1);
-            });
-        })();
     </script>
 </body>
 

@@ -10,42 +10,7 @@
     "en": {
       "title": "Foldable RDP Remote Desktop Client",
       "summary": "Building an Android RDP client optimized for foldable devices.\nThe app supports keyboard mode, an invisible trackpad, and seamless switching between inner and cover screens.\nReleased the first version v1.0.0 on GitHub, and I am currently preparing to publish it on app stores."
-    },
-    "galleries": [
-      {
-        "title": {
-          "vi": "Màn hình ngoài (Cover Screen)",
-          "en": "Cover Screen (Outer)"
-        },
-        "layout": "landscape",
-        "images": [
-          "images/foldable-rdp-client/outer/IMG_20261120_215719.jpg",
-          "images/foldable-rdp-client/outer/IMG_20261120_220011.jpg",
-          "images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-51-20_e78bb72b7b0074174bcf4ef4b2a470ca.jpg",
-          "images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-53-56_e78bb72b7b0074174bcf4ef4b2a470ca.jpg",
-          "images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-55-67_e78bb72b7b0074174bcf4ef4b2a470ca.jpg",
-          "images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-58-75_e78bb72b7b0074174bcf4ef4b2a470ca.jpg"
-        ]
-      },
-      {
-        "title": {
-          "vi": "Màn hình trong (Inner Screen)",
-          "en": "Inner Screen"
-        },
-        "layout": "portrait",
-        "images": [
-          "images/foldable-rdp-client/inner/IMG_20261120_220158.jpg",
-          "images/foldable-rdp-client/inner/IMG_20261120_220247.jpg",
-          "images/foldable-rdp-client/inner/IMG_20261120_220349.jpg",
-          "images/foldable-rdp-client/inner/IMG_20261120_220445.jpg",
-          "images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-02-60_e78bb72b7b0074174bcf4ef4b2a470ca.jpg",
-          "images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-06-17_e78bb72b7b0074174bcf4ef4b2a470ca.jpg",
-          "images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-08-75_e78bb72b7b0074174bcf4ef4b2a470ca.jpg",
-          "images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-13-15_e78bb72b7b0074174bcf4ef4b2a470ca.jpg",
-          "images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-23-43_e78bb72b7b0074174bcf4ef4b2a470ca.jpg"
-        ]
-      }
-    ]
+    }
   },
   {
     "id": "issue-2",

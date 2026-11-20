@@ -271,6 +271,156 @@
                 font-size: 1.5rem;
             }
         }
+        /* App Galleries */
+        .app-galleries {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 8px;
+        }
+
+        .app-gallery-title {
+            margin: 0 0 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .app-gallery-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .app-gallery-grid--landscape {
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        }
+
+        .app-gallery-grid--portrait {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+
+        .app-gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            background: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+            padding: 0;
+            display: block;
+            width: 100%;
+        }
+
+        .app-gallery-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--glass-highlight);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .app-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .app-gallery-grid--landscape .app-gallery-item {
+            aspect-ratio: 1024 / 460;
+        }
+
+        .app-gallery-grid--portrait .app-gallery-item {
+            aspect-ratio: 951 / 1024;
+        }
+
+        /* Lightbox Modal */
+        .lightbox-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 20, 18, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            padding: 24px;
+        }
+
+        .lightbox-modal.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 92vw;
+            max-height: 88vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lightbox-content img {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 14px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .lightbox-close,
+        .lightbox-nav {
+            position: fixed;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            color: var(--text-color);
+            border-radius: 999px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .lightbox-close:hover,
+        .lightbox-nav:hover {
+            background: var(--glass-bg-hover);
+        }
+
+        .lightbox-close {
+            top: 20px;
+            right: 20px;
+            width: 42px;
+            height: 42px;
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+
+        .lightbox-nav {
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            font-size: 1.3rem;
+        }
+
+        .lightbox-prev {
+            left: 18px;
+        }
+
+        .lightbox-next {
+            right: 18px;
+        }
     </style>
 </head>
 
@@ -312,6 +462,68 @@
                         data-i18n="feat.4.desc">Kết nối thẳng tới máy tính của bạn qua giao thức RDP, không qua máy chủ
                         trung gian.</span></li>
             </ul>
+        </article>
+
+        <article class="content-card">
+            <h2 data-i18n="app.galleryTitle">Hình ảnh giao diện</h2>
+            <div class="app-galleries">
+                <div class="app-gallery">
+                    <h3 class="app-gallery-title" data-i18n="app.galleryOuter">Màn hình ngoài (Cover Screen)</h3>
+                    <div class="app-gallery-grid app-gallery-grid--landscape">
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/outer/IMG_20261120_215719.jpg" data-lightbox-caption="Cover Screen (1/6)">
+                            <img src="images/foldable-rdp-client/outer/IMG_20261120_215719.jpg" alt="Cover Screen 1" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/outer/IMG_20261120_220011.jpg" data-lightbox-caption="Cover Screen (2/6)">
+                            <img src="images/foldable-rdp-client/outer/IMG_20261120_220011.jpg" alt="Cover Screen 2" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-51-20_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" data-lightbox-caption="Cover Screen (3/6)">
+                            <img src="images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-51-20_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" alt="Cover Screen 3" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-53-56_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" data-lightbox-caption="Cover Screen (4/6)">
+                            <img src="images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-53-56_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" alt="Cover Screen 4" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-55-67_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" data-lightbox-caption="Cover Screen (5/6)">
+                            <img src="images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-55-67_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" alt="Cover Screen 5" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-58-75_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" data-lightbox-caption="Cover Screen (6/6)">
+                            <img src="images/foldable-rdp-client/outer/Screenshot_2026-11-20-21-50-58-75_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" alt="Cover Screen 6" loading="lazy">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="app-gallery">
+                    <h3 class="app-gallery-title" data-i18n="app.galleryInner">Màn hình trong (Inner Screen)</h3>
+                    <div class="app-gallery-grid app-gallery-grid--portrait">
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/inner/IMG_20261120_220158.jpg" data-lightbox-caption="Inner Screen (1/9)">
+                            <img src="images/foldable-rdp-client/inner/IMG_20261120_220158.jpg" alt="Inner Screen 1" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/inner/IMG_20261120_220247.jpg" data-lightbox-caption="Inner Screen (2/9)">
+                            <img src="images/foldable-rdp-client/inner/IMG_20261120_220247.jpg" alt="Inner Screen 2" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/inner/IMG_20261120_220349.jpg" data-lightbox-caption="Inner Screen (3/9)">
+                            <img src="images/foldable-rdp-client/inner/IMG_20261120_220349.jpg" alt="Inner Screen 3" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/inner/IMG_20261120_220445.jpg" data-lightbox-caption="Inner Screen (4/9)">
+                            <img src="images/foldable-rdp-client/inner/IMG_20261120_220445.jpg" alt="Inner Screen 4" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-02-60_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" data-lightbox-caption="Inner Screen (5/9)">
+                            <img src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-02-60_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" alt="Inner Screen 5" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-06-17_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" data-lightbox-caption="Inner Screen (6/9)">
+                            <img src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-06-17_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" alt="Inner Screen 6" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-08-75_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" data-lightbox-caption="Inner Screen (7/9)">
+                            <img src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-08-75_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" alt="Inner Screen 7" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-13-15_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" data-lightbox-caption="Inner Screen (8/9)">
+                            <img src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-13-15_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" alt="Inner Screen 8" loading="lazy">
+                        </button>
+                        <button type="button" class="app-gallery-item" data-lightbox-src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-23-43_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" data-lightbox-caption="Inner Screen (9/9)">
+                            <img src="images/foldable-rdp-client/inner/Screenshot_2026-11-20-21-50-23-43_e78bb72b7b0074174bcf4ef4b2a470ca.jpg" alt="Inner Screen 9" loading="lazy">
+                        </button>
+                    </div>
+                </div>
+            </div>
         </article>
 
         <article class="content-card">
@@ -360,6 +572,9 @@
                 'feat.3.desc': 'Tích hợp bàn phím ảo và chế độ toàn màn hình tối ưu không gian hiển thị.',
                 'feat.4.title': 'Kết nối trực tiếp & bảo mật:',
                 'feat.4.desc': 'Kết nối thẳng tới máy tính của bạn qua giao thức RDP, không qua máy chủ trung gian.',
+                'app.galleryTitle': 'Hình ảnh giao diện',
+                'app.galleryOuter': 'Màn hình ngoài (Cover Screen)',
+                'app.galleryInner': 'Màn hình trong (Inner Screen)',
                 'release.title': 'Phiên bản mới nhất',
                 'release.loading': 'Đang tải thông tin bản phát hành...',
                 'release.error': 'Chưa có bản phát hành công khai hoặc không thể tải thông tin.',
@@ -385,6 +600,9 @@
                 'feat.3.desc': 'Built-in virtual keyboard support and fullscreen mode for maximum workspace.',
                 'feat.4.title': 'Direct & Private:',
                 'feat.4.desc': 'Connects directly to your Windows PC over RDP with no intermediate servers.',
+                'app.galleryTitle': 'App Screenshots',
+                'app.galleryOuter': 'Cover Screen (Outer)',
+                'app.galleryInner': 'Inner Screen',
                 'release.title': 'Latest Release',
                 'release.loading': 'Loading latest release info...',
                 'release.error': 'No public release found or unable to load release info.',
@@ -471,6 +689,76 @@
             applyLanguage(currentLang);
             localStorage.setItem('portfolio-lang', currentLang);
         });
+    </script>
+
+    <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true">
+        <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+        <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous">&#8249;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <div id="lightbox-caption" class="lightbox-caption"></div>
+        </div>
+        <button type="button" class="lightbox-nav lightbox-next" aria-label="Next">&#8250;</button>
+    </div>
+
+    <script>
+        (function () {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+            const closeBtn = modal.querySelector('.lightbox-close');
+            const prevBtn = modal.querySelector('.lightbox-prev');
+            const nextBtn = modal.querySelector('.lightbox-next');
+
+            let currentItems = [];
+            let currentIndex = 0;
+
+            function showItem(index) {
+                if (!currentItems.length) return;
+                currentIndex = (index + currentItems.length) % currentItems.length;
+                const el = currentItems[currentIndex];
+                img.src = el.dataset.lightboxSrc;
+                img.alt = el.dataset.lightboxCaption || '';
+                caption.textContent = el.dataset.lightboxCaption || '';
+            }
+
+            function openLightbox(target) {
+                const gallery = target.closest('.app-gallery');
+                currentItems = gallery ? Array.from(gallery.querySelectorAll('.app-gallery-item')) : [target];
+                const idx = currentItems.indexOf(target);
+                showItem(idx >= 0 ? idx : 0);
+                modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
+            }
+
+            function closeLightbox() {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+                img.src = '';
+            }
+
+            document.addEventListener('click', (e) => {
+                const item = e.target.closest('.app-gallery-item');
+                if (item) {
+                    openLightbox(item);
+                }
+            });
+
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', () => showItem(currentIndex - 1));
+            nextBtn.addEventListener('click', () => showItem(currentIndex + 1));
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeLightbox();
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (!modal.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showItem(currentIndex - 1);
+                if (e.key === 'ArrowRight') showItem(currentIndex + 1);
+            });
+        })();
     </script>
 </body>
 
