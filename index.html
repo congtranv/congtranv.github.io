@@ -107,6 +107,7 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            white-space: nowrap;
             transition: background 0.25s ease, border-color 0.25s ease, transform 0.15s ease;
         }
 
@@ -341,9 +342,20 @@
             transform: scale(0.96);
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 600px) {
             body {
-                padding-top: 88px;
+                padding-top: 20px;
+            }
+
+            .nav-menu {
+                position: static;
+                transform: none;
+                left: auto;
+                top: auto;
+                margin: 0 auto 20px;
+                width: fit-content;
+                max-width: 100%;
+                border-radius: 24px;
             }
 
             .glass-card {
@@ -355,9 +367,15 @@
                 font-size: 1.55rem;
             }
 
-            .nav-menu button {
+            .nav-menu button,
+            .nav-menu a {
                 padding: 7px 12px;
                 font-size: 0.86rem;
+            }
+
+            #lang-toggle {
+                position: static;
+                margin: 24px auto 0;
             }
         }
     </style>
