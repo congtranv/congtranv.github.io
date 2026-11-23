@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Foldable HID Controller - Giới thiệu ứng dụng và Chính sách quyền riêng tư (Privacy Policy).">
+    <title>Foldable HID Controller — Privacy Policy &amp; Info</title>
+    <style>
+        :root {
+            --bg-start: #042f2e;
+            --bg-mid: #064e3b;
+            --bg-end: #065f46;
+            --orb-1: rgba(52, 211, 153, 0.25);
+            --orb-2: rgba(16, 185, 129, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-bg-hover: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-highlight: rgba(255, 255, 255, 0.35);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
+            --text-color: #f0fdf4;
+            --text-muted: rgba(240, 253, 244, 0.82);
+            --accent-color: #6ee7b7;
+            --nav-active-bg: rgba(110, 231, 183, 0.22);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-mid), var(--bg-end));
+            background-attachment: fixed;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 96px 16px 88px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::before {
+            width: 360px;
+            height: 360px;
+            top: -80px;
+            left: -80px;
+            background: var(--orb-1);
+        }
+
+        body::after {
+            width: 420px;
+            height: 420px;
+            bottom: -100px;
+            right: -100px;
+            background: var(--orb-2);
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            padding: 6px;
+            border-radius: 999px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
+            z-index: 1000;
+            max-width: calc(100vw - 24px);
+            overflow-x: auto;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            white-space: nowrap;
+            transition: background 0.25s ease, transform 0.15s ease;
+        }
+
+        .nav-menu a:hover {
+            background: var(--glass-bg-hover);
+        }
+
+        .nav-menu a.active {
+            background: var(--nav-active-bg);
+            border: 1px solid var(--glass-highlight);
+            font-weight: 600;
+        }
+
+        main {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-top-color: var(--glass-highlight);
+            border-left-color: var(--glass-highlight);
+            border-radius: 28px;
+            padding: 30px 28px;
+            box-shadow: var(--glass-shadow);
+            text-align: center;
+            width: 100%;
+        }
+
+        .glass-card h1 {
+            margin: 0 0 8px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .glass-card .subtitle {
+            margin: 0;
+            font-size: 1.02rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .content-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-top-color: var(--glass-highlight);
+            border-left: 4px solid var(--accent-color);
+            padding: 22px 24px;
+            border-radius: 22px;
+            text-align: left;
+            box-shadow: var(--glass-shadow);
+            width: 100%;
+        }
+
+        .content-card h2 {
+            margin: 0 0 10px;
+            font-size: 1.12rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .content-card p {
+            margin: 0 0 10px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .content-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-card ul {
+            margin: 0;
+            padding-left: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.94rem;
+            color: var(--text-muted);
+        }
+
+        .content-card li strong {
+            color: var(--text-color);
+        }
+
+        .download-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: var(--nav-active-bg);
+            border: 1px solid var(--accent-color);
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: background 0.2s ease, transform 0.15s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--glass-bg-hover);
+        }
+
+        .download-btn:active {
+            transform: scale(0.96);
+        }
+
+        .release-meta {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        #lang-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--glass-border);
+            border-top-color: var(--glass-highlight);
+            background: var(--glass-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: var(--glass-shadow);
+            font-size: 0.88rem;
+            font-weight: 500;
+            z-index: 1000;
+            transition: background 0.25s ease, transform 0.15s ease;
+        }
+
+        #lang-toggle:hover {
+            background: var(--glass-bg-hover);
+        }
+
+        #lang-toggle:active {
+            transform: scale(0.96);
+        }
+
+        #lang-toggle:focus-visible {
+            outline: 2px solid var(--accent-color);
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 88px;
+            }
+
+            .glass-card {
+                padding: 24px 20px;
+                border-radius: 24px;
+            }
+
+            .glass-card h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="nav-menu" aria-label="Điều hướng">
+            <a href="index.html" data-i18n="nav.home">Trang chủ</a>
+            <a href="foldable-rdp-privacy.html">Foldable RDP</a>
+            <a href="foldable-hid-privacy.html" class="active" aria-current="page">Foldable HID</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="glass-card">
+            <h1>Foldable HID Controller</h1>
+            <p class="subtitle" data-i18n="app.shortDesc">Biến điện thoại màn hình gập thành bàn phím đầy đủ và trackpad
+                đa điểm cho Windows.</p>
+        </section>
+
+        <article class="content-card">
+            <h2 data-i18n="app.overviewTitle">Giới thiệu ứng dụng</h2>
+            <p data-i18n="app.fullDesc">Foldable HID Controller biến thiết bị Android (đặc biệt tối ưu cho điện thoại
+                màn hình gập) thành bàn phím 6 hàng đầy đủ và trackpad đa điểm kết nối trực tiếp tới máy tính Windows
+                qua Bluetooth HID, Bluetooth SPP, Wi-Fi LAN hoặc USB Tethering.</p>
+        </article>
+
+        <article class="content-card">
+            <h2 data-i18n="app.featuresTitle">Tính năng nổi bật</h2>
+            <ul>
+                <li><strong data-i18n="feat.1.title">Tối ưu cho màn hình gập:</strong> <span data-i18n="feat.1.desc">Tự
+                        động chuyển bố cục ngang cho màn hình ngoài và chia đôi Trên/Dưới hoặc toàn màn hình cho màn
+                        hình trong.</span></li>
+                <li><strong data-i18n="feat.2.title">4 chế độ kết nối linh hoạt:</strong> <span
+                        data-i18n="feat.2.desc">Hỗ trợ Bluetooth HID thuần, Bluetooth SPP, Wi-Fi LAN tự động dò tìm và
+                        USB Tethering / ADB qua FoldableHidReceiver.exe.</span></li>
+                <li><strong data-i18n="feat.3.title">Bàn phím 6 hàng &amp; Trackpad tùy chỉnh:</strong> <span
+                        data-i18n="feat.3.desc">Phân nhóm 5 màu phím trực quan, giữ phím modifier (Ctrl/Shift/Alt/Win),
+                        cử chỉ đa điểm 1–3 ngón và thanh chỉnh độ nhạy Trackpad.</span></li>
+                <li><strong data-i18n="feat.4.title">Chống lưu ảnh màn hình OLED:</strong> <span
+                        data-i18n="feat.4.desc">Nền đen thuần (#000000), dịch chuyển điểm ảnh định kỳ (Pixel Shift) và
+                        tự làm dịu màn hình khi không thao tác (Auto-Dim).</span></li>
+            </ul>
+        </article>
+
+        <article class="content-card">
+            <h2 data-i18n="release.title">Phiên bản mới nhất</h2>
+            <div id="release-info">
+                <p data-i18n="release.loading">Đang tải thông tin bản phát hành...</p>
+            </div>
+        </article>
+
+        <article class="content-card">
+            <h2 data-i18n="privacy.title">Chính sách quyền riêng tư (Privacy Policy)</h2>
+            <ul>
+                <li data-i18n="privacy.1">Ứng dụng không thu thập, lưu trữ hay chia sẻ bất kỳ dữ liệu cá nhân, phím bấm
+                    hoặc thao tác chuột nào lên máy chủ bên thứ ba.</li>
+                <li data-i18n="privacy.2">Cài đặt người dùng (như độ nhạy Trackpad) chỉ được lưu cục bộ trên thiết bị
+                    của bạn.</li>
+                <li data-i18n="privacy.3">Quyền Bluetooth và Mạng (BLUETOOTH_CONNECT, BLUETOOTH_ADVERTISE,
+                    BLUETOOTH_SCAN, INTERNET) chỉ dùng để giao tiếp trực tiếp từ điện thoại tới máy tính Windows của
+                    bạn.</li>
+            </ul>
+        </article>
+    </main>
+
+    <button id="lang-toggle" type="button" aria-label="Chuyển đổi ngôn ngữ">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M2 12h20"></path>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        <span id="lang-label">Ngôn ngữ: Tiếng Việt</span>
+    </button>
+
+    <script>
+        const TRANSLATIONS = {
+            vi: {
+                'nav.home': 'Trang chủ',
+                'app.shortDesc': 'Biến điện thoại màn hình gập thành bàn phím đầy đủ và trackpad đa điểm cho Windows.',
+                'app.overviewTitle': 'Giới thiệu ứng dụng',
+                'app.fullDesc': 'Foldable HID Controller biến thiết bị Android (đặc biệt tối ưu cho điện thoại màn hình gập) thành bàn phím 6 hàng đầy đủ và trackpad đa điểm kết nối trực tiếp tới máy tính Windows qua Bluetooth HID, Bluetooth SPP, Wi-Fi LAN hoặc USB Tethering.',
+                'app.featuresTitle': 'Tính năng nổi bật',
+                'feat.1.title': 'Tối ưu cho màn hình gập:',
+                'feat.1.desc': 'Tự động chuyển bố cục ngang cho màn hình ngoài và chia đôi Trên/Dưới hoặc toàn màn hình cho màn hình trong.',
+                'feat.2.title': '4 chế độ kết nối linh hoạt:',
+                'feat.2.desc': 'Hỗ trợ Bluetooth HID thuần, Bluetooth SPP, Wi-Fi LAN tự động dò tìm và USB Tethering / ADB qua FoldableHidReceiver.exe.',
+                'feat.3.title': 'Bàn phím 6 hàng & Trackpad tùy chỉnh:',
+                'feat.3.desc': 'Phân nhóm 5 màu phím trực quan, giữ phím modifier (Ctrl/Shift/Alt/Win), cử chỉ đa điểm 1–3 ngón và thanh chỉnh độ nhạy Trackpad.',
+                'feat.4.title': 'Chống lưu ảnh màn hình OLED:',
+                'feat.4.desc': 'Nền đen thuần (#000000), dịch chuyển điểm ảnh định kỳ (Pixel Shift) và tự làm dịu màn hình khi không thao tác (Auto-Dim).',
+                'release.title': 'Phiên bản mới nhất',
+                'release.loading': 'Đang tải thông tin bản phát hành...',
+                'release.error': 'Chưa có bản phát hành công khai hoặc không thể tải thông tin.',
+                'release.downloadApk': 'Tải APK Android',
+                'release.downloadExe': 'Tải Windows EXE',
+                'release.view': 'Xem trên GitHub',
+                'privacy.title': 'Chính sách quyền riêng tư (Privacy Policy)',
+                'privacy.1': 'Ứng dụng không thu thập, lưu trữ hay chia sẻ bất kỳ dữ liệu cá nhân, phím bấm hoặc thao tác chuột nào lên máy chủ bên thứ ba.',
+                'privacy.2': 'Cài đặt người dùng (như độ nhạy Trackpad) chỉ được lưu cục bộ trên thiết bị của bạn.',
+                'privacy.3': 'Quyền Bluetooth và Mạng (BLUETOOTH_CONNECT, BLUETOOTH_ADVERTISE, BLUETOOTH_SCAN, INTERNET) chỉ dùng để giao tiếp trực tiếp từ điện thoại tới máy tính Windows của bạn.',
+                'lang.button': 'Ngôn ngữ: Tiếng Việt'
+            },
+            en: {
+                'nav.home': 'Home',
+                'app.shortDesc': 'Turn your foldable phone into a full keyboard and multi-touch trackpad for Windows.',
+                'app.overviewTitle': 'About the App',
+                'app.fullDesc': 'Foldable HID Controller turns your Android device (tailored for foldable phones) into a full 6-row keyboard and precision multi-touch trackpad for Windows via Bluetooth HID, Bluetooth SPP, Wi-Fi LAN, or USB Tethering.',
+                'app.featuresTitle': 'Key Features',
+                'feat.1.title': 'Foldable-Aware Layout:',
+                'feat.1.desc': 'Automatically adapts between landscape split on the cover screen and vertical split or fullscreen modes on the inner screen.',
+                'feat.2.title': '4 Connection Modes:',
+                'feat.2.desc': 'Supports native Bluetooth HID, Bluetooth SPP, Wi-Fi LAN auto-discovery, and USB Tethering / ADB via FoldableHidReceiver.exe.',
+                'feat.3.title': '6-Row Keyboard & Custom Trackpad:',
+                'feat.3.desc': '5 distinct key color groups, latched/held modifiers (Ctrl/Shift/Alt/Win), 1–3 finger gestures, and persistent Trackpad sensitivity slider.',
+                'feat.4.title': 'OLED Burn-in Protection:',
+                'feat.4.desc': 'True black (#000000) surfaces, periodic Pixel Shift, and idle Auto-Dim.',
+                'release.title': 'Latest Release',
+                'release.loading': 'Loading latest release info...',
+                'release.error': 'No public release found or unable to load release info.',
+                'release.downloadApk': 'Download Android APK',
+                'release.downloadExe': 'Download Windows EXE',
+                'release.view': 'View on GitHub',
+                'privacy.title': 'Privacy Policy',
+                'privacy.1': 'The app does not collect, store, or share any personal data, keystrokes, or pointer input with third-party servers.',
+                'privacy.2': 'User preferences (such as Trackpad sensitivity) are stored locally on your device only.',
+                'privacy.3': 'Bluetooth and Network permissions (BLUETOOTH_CONNECT, BLUETOOTH_ADVERTISE, BLUETOOTH_SCAN, INTERNET) are used solely for direct communication between your phone and your Windows PC.',
+                'lang.button': 'Language: English'
+            }
+        };
+
+        const langToggle = document.getElementById('lang-toggle');
+        const langLabel = document.getElementById('lang-label');
+        const i18nElements = document.querySelectorAll('[data-i18n]');
+        let currentLang = localStorage.getItem('portfolio-lang') === 'en' ? 'en' : 'vi';
+
+        const RELEASE_REPO = 'congtranv/foldable-hid-releases';
+        const releaseInfoEl = document.getElementById('release-info');
+        let latestReleaseData = null;
+
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function renderRelease(lang) {
+            const dict = TRANSLATIONS[lang] || TRANSLATIONS.vi;
+            if (!latestReleaseData) {
+                releaseInfoEl.innerHTML = `<p>${dict['release.error']}</p><div class="download-actions"><a class="download-btn" href="https://github.com/${RELEASE_REPO}/releases" target="_blank" rel="noopener noreferrer">${dict['release.view']}</a></div>`;
+                return;
+            }
+            const tag = escapeHtml(latestReleaseData.tag_name || '');
+            const date = latestReleaseData.published_at
+                ? latestReleaseData.published_at.slice(0, 10).split('-').reverse().join('/')
+                : '';
+            const assets = latestReleaseData.assets || [];
+            const apkAsset = assets.find(a => a.name.toLowerCase().endsWith('.apk'));
+            const exeAsset = assets.find(a => a.name.toLowerCase().endsWith('.exe'));
+            const notes = latestReleaseData.body ? escapeHtml(latestReleaseData.body).replace(/\n/g, '<br>') : '';
+
+            const buttons = [];
+            if (apkAsset) {
+                buttons.push(`<a class="download-btn" href="${apkAsset.browser_download_url}" target="_blank" rel="noopener noreferrer">${dict['release.downloadApk']} (${escapeHtml(apkAsset.name)})</a>`);
+            }
+            if (exeAsset) {
+                buttons.push(`<a class="download-btn" href="${exeAsset.browser_download_url}" target="_blank" rel="noopener noreferrer">${dict['release.downloadExe']} (${escapeHtml(exeAsset.name)})</a>`);
+            }
+            if (buttons.length === 0) {
+                buttons.push(`<a class="download-btn" href="${latestReleaseData.html_url}" target="_blank" rel="noopener noreferrer">${dict['release.view']}</a>`);
+            }
+
+            releaseInfoEl.innerHTML = `
+                <div class="release-meta">${tag}${date ? ` · ${date}` : ''}</div>
+                ${notes ? `<p>${notes}</p>` : ''}
+                <div class="download-actions">${buttons.join('')}</div>
+            `;
+        }
+
+        async function fetchLatestRelease() {
+            try {
+                const res = await fetch(`https://api.github.com/repos/${RELEASE_REPO}/releases/latest`);
+                if (!res.ok) throw new Error('Release fetch failed');
+                latestReleaseData = await res.json();
+            } catch {
+                latestReleaseData = null;
+            }
+            renderRelease(currentLang);
+        }
+
+        function applyLanguage(lang) {
+            const dict = TRANSLATIONS[lang] || TRANSLATIONS.vi;
+            document.documentElement.lang = lang;
+            i18nElements.forEach(el => {
+                const key = el.dataset.i18n;
+                if (dict[key] !== undefined) {
+                    el.textContent = dict[key];
+                }
+            });
+            langLabel.textContent = dict['lang.button'];
+            if (latestReleaseData !== null) {
+                renderRelease(lang);
+            }
+        }
+
+        applyLanguage(currentLang);
+        fetchLatestRelease();
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'vi' ? 'en' : 'vi';
+            applyLanguage(currentLang);
+            localStorage.setItem('portfolio-lang', currentLang);
+        });
+    </script>
+</body>
+
+</html>
