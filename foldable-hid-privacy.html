@@ -427,6 +427,7 @@
                 'release.error': 'Chưa có bản phát hành công khai hoặc không thể tải thông tin.',
                 'release.downloadApk': 'Tải APK Android',
                 'release.downloadExe': 'Tải Windows EXE',
+                'release.downloadUbuntuZip': 'Tải Ubuntu ZIP',
                 'release.view': 'Xem trên GitHub',
                 'issues.title': 'Báo lỗi & Góp ý',
                 'issues.desc': 'Gặp sự cố hoặc muốn đề xuất tính năng mới? Gửi phản hồi trực tiếp qua GitHub Issues.',
@@ -458,6 +459,7 @@
                 'release.error': 'No public release found or unable to load release info.',
                 'release.downloadApk': 'Download Android APK',
                 'release.downloadExe': 'Download Windows EXE',
+                'release.downloadUbuntuZip': 'Download Ubuntu ZIP',
                 'release.view': 'View on GitHub',
                 'issues.title': 'Feedback & Issues',
                 'issues.desc': 'Found a bug or have a feature request? Submit feedback directly via GitHub Issues.',
@@ -502,6 +504,7 @@
             const assets = latestReleaseData.assets || [];
             const apkAsset = assets.find(a => a.name.toLowerCase().endsWith('.apk'));
             const exeAsset = assets.find(a => a.name.toLowerCase().endsWith('.exe'));
+            const ubuntuZipAsset = assets.find(a => /^foldable-hid-ubuntu-service-.*\.zip$/i.test(a.name));
             const notes = latestReleaseData.body ? escapeHtml(latestReleaseData.body).replace(/\n/g, '<br>') : '';
 
             const buttons = [];
@@ -510,6 +513,9 @@
             }
             if (exeAsset) {
                 buttons.push(`<a class="download-btn" href="${exeAsset.browser_download_url}" target="_blank" rel="noopener noreferrer">${dict['release.downloadExe']} (${escapeHtml(exeAsset.name)})</a>`);
+            }
+            if (ubuntuZipAsset) {
+                buttons.push(`<a class="download-btn" href="${ubuntuZipAsset.browser_download_url}" target="_blank" rel="noopener noreferrer">${dict['release.downloadUbuntuZip']} (${escapeHtml(ubuntuZipAsset.name)})</a>`);
             }
             if (buttons.length === 0) {
                 buttons.push(`<a class="download-btn" href="${latestReleaseData.html_url}" target="_blank" rel="noopener noreferrer">${dict['release.view']}</a>`);
