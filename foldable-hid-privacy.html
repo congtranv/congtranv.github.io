@@ -163,7 +163,7 @@
             cursor: pointer;
         }
 
-        .content-card:not(.expanded) > :not(h2) {
+        .content-card:not(.expanded)> :not(h2) {
             display: none;
         }
 
@@ -325,60 +325,74 @@
         </section>
 
         <div class="cards-scroll">
-        <article class="content-card">
-            <h2 data-i18n="app.overviewTitle">Giới thiệu ứng dụng</h2>
-            <p data-i18n="app.fullDesc">Foldable HID Controller biến thiết bị Android (đặc biệt tối ưu cho điện thoại
-                màn hình gập) thành bàn phím 6 hàng đầy đủ và trackpad đa điểm kết nối trực tiếp tới máy tính Windows
-                qua Bluetooth HID, Bluetooth SPP, Wi-Fi LAN hoặc USB Tethering.</p>
-        </article>
+            <article class="content-card">
+                <h2 data-i18n="app.overviewTitle">Giới thiệu ứng dụng</h2>
+                <p data-i18n="app.fullDesc">Foldable HID Controller biến thiết bị Android (đặc biệt tối ưu cho điện
+                    thoại
+                    màn hình gập) thành bàn phím 6 hàng đầy đủ và trackpad đa điểm kết nối trực tiếp tới máy tính
+                    Windows
+                    qua Bluetooth HID, Bluetooth SPP, Wi-Fi LAN hoặc USB Tethering.</p>
+            </article>
 
-        <article class="content-card">
-            <h2 data-i18n="app.featuresTitle">Tính năng nổi bật</h2>
-            <ul>
-                <li><strong data-i18n="feat.1.title">Tối ưu cho màn hình gập:</strong> <span data-i18n="feat.1.desc">Tự
-                        động chuyển bố cục ngang cho màn hình ngoài và chia đôi Trên/Dưới hoặc toàn màn hình cho màn
-                        hình trong.</span></li>
-                <li><strong data-i18n="feat.2.title">4 chế độ kết nối linh hoạt:</strong> <span
-                        data-i18n="feat.2.desc">Hỗ trợ Bluetooth HID thuần, Bluetooth SPP, Wi-Fi LAN tự động dò tìm và
-                        USB Tethering / ADB qua FoldableHidReceiver.exe.</span></li>
-                <li><strong data-i18n="feat.3.title">Bàn phím 6 hàng &amp; Trackpad tùy chỉnh:</strong> <span
-                        data-i18n="feat.3.desc">Phân nhóm 5 màu phím trực quan, giữ phím modifier (Ctrl/Shift/Alt/Win),
-                        cử chỉ đa điểm 1–3 ngón và thanh chỉnh độ nhạy Trackpad.</span></li>
-                <li><strong data-i18n="feat.4.title">Chống lưu ảnh màn hình OLED:</strong> <span
-                        data-i18n="feat.4.desc">Nền đen thuần (#000000), dịch chuyển điểm ảnh định kỳ (Pixel Shift) và
-                        tự làm dịu màn hình khi không thao tác (Auto-Dim).</span></li>
-            </ul>
-        </article>
+            <article class="content-card">
+                <h2 data-i18n="app.featuresTitle">Tính năng nổi bật</h2>
+                <ul>
+                    <li><strong data-i18n="feat.1.title">Tối ưu cho màn hình gập:</strong> <span
+                            data-i18n="feat.1.desc">Tự
+                            động chuyển bố cục ngang cho màn hình ngoài và chia đôi Trên/Dưới hoặc toàn màn hình cho màn
+                            hình trong.</span></li>
+                    <li><strong data-i18n="feat.2.title">4 chế độ kết nối linh hoạt:</strong> <span
+                            data-i18n="feat.2.desc">Hỗ trợ Bluetooth HID thuần, Bluetooth SPP, Wi-Fi LAN tự động dò tìm
+                            và
+                            USB Tethering / ADB qua FoldableHidReceiver.exe.</span></li>
+                    <li><strong data-i18n="feat.3.title">Bàn phím 6 hàng &amp; Trackpad tùy chỉnh:</strong> <span
+                            data-i18n="feat.3.desc">Phân nhóm 5 màu phím trực quan, giữ phím modifier
+                            (Ctrl/Shift/Alt/Win),
+                            cử chỉ đa điểm 1–3 ngón và thanh chỉnh độ nhạy Trackpad.</span></li>
+                    <li><strong data-i18n="feat.4.title">Chống lưu ảnh màn hình OLED:</strong> <span
+                            data-i18n="feat.4.desc">Nền đen thuần (#000000), dịch chuyển điểm ảnh định kỳ (Pixel Shift)
+                            và
+                            tự làm dịu màn hình khi không thao tác (Auto-Dim).</span></li>
+                </ul>
+            </article>
 
-        <article class="content-card">
-            <h2 data-i18n="release.title">Phiên bản mới nhất</h2>
-            <div id="release-info">
-                <p data-i18n="release.loading">Đang tải thông tin bản phát hành...</p>
-            </div>
-        </article>
+            <article class="content-card">
+                <h2 data-i18n="release.title">Phiên bản mới nhất</h2>
+                <div id="release-info">
+                    <p data-i18n="release.loading">Đang tải thông tin bản phát hành...</p>
+                </div>
+            </article>
 
-        <article class="content-card">
-            <h2 data-i18n="issues.title">Báo lỗi &amp; Góp ý</h2>
-            <p data-i18n="issues.desc">Gặp sự cố hoặc muốn đề xuất tính năng mới? Gửi phản hồi trực tiếp qua GitHub Issues.</p>
-            <div class="download-actions">
-                <a class="download-btn" href="https://github.com/congtranv/foldable-hid-releases/issues/new?template=bug_report.yml" target="_blank" rel="noopener noreferrer" data-i18n="issues.bug">Báo lỗi</a>
-                <a class="download-btn" href="https://github.com/congtranv/foldable-hid-releases/issues/new?template=feature_request.yml" target="_blank" rel="noopener noreferrer" data-i18n="issues.feature">Yêu cầu tính năng</a>
-                <a class="download-btn" href="https://github.com/congtranv/foldable-hid-releases/issues" target="_blank" rel="noopener noreferrer" data-i18n="issues.list">Xem Issues</a>
-            </div>
-        </article>
+            <article class="content-card">
+                <h2 data-i18n="issues.title">Báo lỗi &amp; Góp ý</h2>
+                <p data-i18n="issues.desc">Gặp sự cố hoặc muốn đề xuất tính năng mới? Gửi phản hồi trực tiếp qua GitHub
+                    Issues.</p>
+                <div class="download-actions">
+                    <a class="download-btn"
+                        href="https://github.com/congtranv/foldable-hid-releases/issues/new?template=bug_report.yml"
+                        target="_blank" rel="noopener noreferrer" data-i18n="issues.bug">Báo lỗi</a>
+                    <a class="download-btn"
+                        href="https://github.com/congtranv/foldable-hid-releases/issues/new?template=feature_request.yml"
+                        target="_blank" rel="noopener noreferrer" data-i18n="issues.feature">Yêu cầu tính năng</a>
+                    <a class="download-btn" href="https://github.com/congtranv/foldable-hid-releases/issues"
+                        target="_blank" rel="noopener noreferrer" data-i18n="issues.list">Xem Issues</a>
+                </div>
+            </article>
 
-        <article class="content-card">
-            <h2 data-i18n="privacy.title">Chính sách quyền riêng tư (Privacy Policy)</h2>
-            <ul>
-                <li data-i18n="privacy.1">Ứng dụng không thu thập, lưu trữ hay chia sẻ bất kỳ dữ liệu cá nhân, phím bấm
-                    hoặc thao tác chuột nào lên máy chủ bên thứ ba.</li>
-                <li data-i18n="privacy.2">Cài đặt người dùng (như độ nhạy Trackpad) chỉ được lưu cục bộ trên thiết bị
-                    của bạn.</li>
-                <li data-i18n="privacy.3">Quyền Bluetooth và Mạng (BLUETOOTH_CONNECT, BLUETOOTH_ADVERTISE,
-                    BLUETOOTH_SCAN, INTERNET) chỉ dùng để giao tiếp trực tiếp từ điện thoại tới máy tính Windows của
-                    bạn.</li>
-            </ul>
-        </article>
+            <article class="content-card">
+                <h2 data-i18n="privacy.title">Chính sách quyền riêng tư (Privacy Policy)</h2>
+                <ul>
+                    <li data-i18n="privacy.1">Ứng dụng không thu thập, lưu trữ hay chia sẻ bất kỳ dữ liệu cá nhân, phím
+                        bấm
+                        hoặc thao tác chuột nào lên máy chủ bên thứ ba.</li>
+                    <li data-i18n="privacy.2">Cài đặt người dùng (như độ nhạy Trackpad) chỉ được lưu cục bộ trên thiết
+                        bị
+                        của bạn.</li>
+                    <li data-i18n="privacy.3">Quyền Bluetooth và Mạng (BLUETOOTH_CONNECT, BLUETOOTH_ADVERTISE,
+                        BLUETOOTH_SCAN, INTERNET) chỉ dùng để giao tiếp trực tiếp từ điện thoại tới máy tính Windows của
+                        bạn.</li>
+                </ul>
+            </article>
         </div>
     </main>
 
@@ -419,7 +433,7 @@
                 'issues.bug': 'Báo lỗi',
                 'issues.feature': 'Yêu cầu tính năng',
                 'issues.list': 'Xem Issues',
-                'privacy.title': 'Chính sách quyền riêng tư (Privacy Policy)',
+                'privacy.title': 'Chính sách quyền riêng tư',
                 'privacy.1': 'Ứng dụng không thu thập, lưu trữ hay chia sẻ bất kỳ dữ liệu cá nhân, phím bấm hoặc thao tác chuột nào lên máy chủ bên thứ ba.',
                 'privacy.2': 'Cài đặt người dùng (như độ nhạy Trackpad) chỉ được lưu cục bộ trên thiết bị của bạn.',
                 'privacy.3': 'Quyền Bluetooth và Mạng (BLUETOOTH_CONNECT, BLUETOOTH_ADVERTISE, BLUETOOTH_SCAN, INTERNET) chỉ dùng để giao tiếp trực tiếp từ điện thoại tới máy tính Windows của bạn.',
