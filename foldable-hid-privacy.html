@@ -314,6 +314,7 @@
             <a href="index.html" data-i18n="nav.home">Trang chủ</a>
             <a href="foldable-rdp-privacy.html">Foldable RDP</a>
             <a href="foldable-hid-privacy.html" class="active" aria-current="page">Foldable HID</a>
+            <a href="foldable-editor-privacy.html">Foldable Editor</a>
         </nav>
     </header>
 
@@ -584,11 +585,11 @@
                 const dy = y - swipeStartY;
                 const elapsed = Date.now() - swipeStartTime;
 
-                if (elapsed <= 600 && dx >= 50 && Math.abs(dx) >= Math.abs(dy) * 1.5) {
+                if (elapsed <= 600 && Math.abs(dx) >= 50 && Math.abs(dx) >= Math.abs(dy) * 1.5) {
                     if (window.getSelection) {
                         window.getSelection().removeAllRanges();
                     }
-                    window.location.href = 'index.html';
+                    window.location.href = dx < 0 ? 'foldable-editor-privacy.html' : 'foldable-rdp-privacy.html';
                 }
             }
 

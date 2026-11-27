@@ -476,6 +476,7 @@
             <button type="button" data-page="about" data-i18n="nav.about">About</button>
             <a href="foldable-rdp-privacy.html">Foldable RDP</a>
             <a href="foldable-hid-privacy.html">Foldable HID</a>
+            <a href="foldable-editor-privacy.html">Foldable Editor</a>
         </nav>
     </header>
 
@@ -583,6 +584,10 @@
         });
 
         const pageOrder = Array.from(navButtons).map(btn => btn.dataset.page);
+        const initialHashPage = window.location.hash.replace(/^#/, '');
+        if (pageOrder.includes(initialHashPage)) {
+            showPage(initialHashPage);
+        }
         let swipeStartX = 0;
         let swipeStartY = 0;
         let swipeStartTime = 0;
